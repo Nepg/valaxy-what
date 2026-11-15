@@ -1,4 +1,6 @@
 <script setup>
+import { withBase } from 'valaxy'
+
 defineProps({
   icon: { type: String, required: true },
   name: { type: String, required: true },
@@ -13,7 +15,7 @@ defineProps({
     <!-- 1. 桌面端视图 -->
     <div class="desktop-view">
       <div class="card-main">
-        <img :src="icon" :alt="name">
+        <img :src="withBase(icon)" :alt="name">
         <div class="card-text">
           <div
             class="card-title"
@@ -72,7 +74,7 @@ defineProps({
       <!-- 左侧大热区 -->
       <a :href="website || pan" target="_blank" class="mobile-main">
         <div class="mobile-main-content">
-          <img class="app-logo" :src="icon" :alt="name">
+          <img class="app-logo" :src="withBase(icon)" :alt="name">
           <div class="card-text">
             <div
               class="card-title"
