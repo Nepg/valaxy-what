@@ -1,4 +1,4 @@
-process.exit(0)
+// process.exit(0)
 import assert from 'node:assert/strict'
 import { access, readFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
