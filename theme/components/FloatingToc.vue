@@ -18,7 +18,7 @@ function handleLinkClick(e: Event) {
   <!-- 桌面端：正常列在右边 -->
   <aside class="desktop-toc">
     <div class="toc-title">
-      本文目录
+      目录
     </div>
     <ul class="toc-list">
       <li v-for="header in flatHeaders" :key="header.link" class="toc-item" :class="[`level-${header.level}`]">
@@ -74,7 +74,7 @@ function handleLinkClick(e: Event) {
   line-height: 1.5;
 }
 .toc-item a {
-  color: var(--vp-c-text-2);
+  color: var(--ark-muted);
   text-decoration: none;
   font-size: 13px;
   display: block;
@@ -189,7 +189,7 @@ function handleLinkClick(e: Event) {
     color: var(--vp-c-text-2);
     cursor: pointer;
     padding: 4px;
-
+  }
     .toc-item {
       margin-bottom: 0;
     }
@@ -199,5 +199,4 @@ function handleLinkClick(e: Event) {
       border-bottom: 1px solid var(--vp-c-divider);
     }
   }
-}
 </style>
