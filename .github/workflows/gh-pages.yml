@@ -30,10 +30,13 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm build
+      - name: Build
+        working-directory: ./demo
+        run: pnpm build
         env:
-          VITE_BASE: /valaxy-theme-arknights/
-          SITE_URL: https://你的用户名.github.io/valaxy-theme-arknights/
+          # 注意：这里换成你自己的仓库名
+          VITE_BASE: /valaxy-what/
+          SITE_URL: https://Nepg.github.io/valaxy-what/
       - uses: actions/upload-pages-artifact@v4
         with:
           path: demo/dist
