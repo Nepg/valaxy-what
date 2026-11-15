@@ -1,4 +1,3 @@
-
 ```bash
 pnpm dlx degit valaxyjs/valaxy-theme-arknights valaxy-theme-arknights
 cd valaxy-theme-arknights

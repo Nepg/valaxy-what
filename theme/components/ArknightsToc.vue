@@ -4,7 +4,7 @@ import { computed, ref } from 'vue'
 
 const { headers, handleClick } = useOutline()
 
-const flatten = (entries: any[]): any[] => {
+function flatten(entries: any[]): any[] {
   return entries.flatMap(entry => [entry, ...flatten(entry.children || [])])
 }
 const flatHeaders = computed(() => flatten(headers.value || []))
@@ -13,7 +13,7 @@ const flatHeaders = computed(() => flatten(headers.value || []))
 const isMobileTocOpen = ref(false)
 
 // 点击目录项后，自动关闭移动端抽屉
-const handleLinkClick = (e: Event, link: string) => {
+function handleLinkClick(e: Event, _link: string) {
   handleClick(e)
   isMobileTocOpen.value = false
 }
@@ -21,48 +21,52 @@ const handleLinkClick = (e: Event, link: string) => {
 
 <template>
   <!-- 移动端浮动按钮（仅在移动端显示） -->
-  <button 
-    class="mobile-toc-toggle" 
-    @click="isMobileTocOpen = true"
+  <button
+    class="mobile-toc-toggle"
     aria-label="打开目录"
+    @click="isMobileTocOpen = true"
   >
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="8" y1="6" x2="21" y2="6"></line>
-      <line x1="8" y1="12" x2="21" y2="12"></line>
-      <line x1="8" y1="18" x2="21" y2="18"></line>
-      <line x1="3" y1="6" x2="3.01" y2="6"></line>
-      <line x1="3" y1="12" x2="3.01" y2="12"></line>
-      <line x1="3" y1="18" x2="3.01" y2="18"></line>
+      <line x1="8" y1="6" x2="21" y2="6" />
+      <line x1="8" y1="12" x2="21" y2="12" />
+      <line x1="8" y1="18" x2="21" y2="18" />
+      <line x1="3" y1="6" x2="3.01" y2="6" />
+      <line x1="3" y1="12" x2="3.01" y2="12" />
+      <line x1="3" y1="18" x2="3.01" y2="18" />
     </svg>
     <span>目录</span>
   </button>
 
   <!-- 移动端遮罩层 -->
-  <div 
-    v-if="isMobileTocOpen" 
-    class="mobile-toc-overlay" 
+  <div
+    v-if="isMobileTocOpen"
+    class="mobile-toc-overlay"
     @click="isMobileTocOpen = false"
-  ></div>
+  />
 
   <!-- 目录面板（桌面端是侧边栏，移动端是抽屉） -->
-  <aside 
-    v-if="flatHeaders.length" 
-    :class="['custom-floating-toc', { 'is-mobile-open': isMobileTocOpen }]"
+  <aside
+    v-if="flatHeaders.length"
+    class="custom-floating-toc" :class="[{ 'is-mobile-open': isMobileTocOpen }]"
   >
     <div class="toc-header">
-      <div class="toc-title">本文目录</div>
+      <div class="toc-title">
+        本文目录
+      </div>
       <!-- 移动端关闭按钮 -->
-      <button class="mobile-toc-close" @click="isMobileTocOpen = false">✕</button>
+      <button class="mobile-toc-close" @click="isMobileTocOpen = false">
+        ✕
+      </button>
     </div>
-    
+
     <ul class="toc-list">
-      <li 
-        v-for="header in flatHeaders" 
-        :key="header.link" 
-        :class="['toc-item', `level-${header.level}`]"
+      <li
+        v-for="header in flatHeaders"
+        :key="header.link"
+        class="toc-item" :class="[`level-${header.level}`]"
       >
-        <a 
-          :href="header.link" 
+        <a
+          :href="header.link"
           @click="(e) => handleLinkClick(e, header.link)"
         >
           {{ header.title }}
@@ -138,8 +142,12 @@ const handleLinkClick = (e: Event, link: string) => {
 .toc-item a:hover {
   color: var(--vp-c-brand-1);
 }
-.level-3 { padding-left: 14px; }
-.level-4 { padding-left: 28px; }
+.level-3 {
+  padding-left: 14px;
+}
+.level-4 {
+  padding-left: 28px;
+}
 
 /* =========================================
    移动端样式 (屏幕宽度 <= 1024px)
@@ -168,7 +176,9 @@ const handleLinkClick = (e: Event, link: string) => {
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s;
+    transition:
+      background-color 0.2s,
+      transform 0.2s;
   }
   .mobile-toc-toggle:active {
     transform: scale(0.95);
@@ -199,7 +209,7 @@ const handleLinkClick = (e: Event, link: string) => {
     border-top: 1px solid var(--vp-c-divider);
     border-radius: 16px 16px 0 0;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
-    
+
     /* 默认隐藏（向下平移），打开时滑入 */
     transform: translateY(100%);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);

@@ -1,9 +1,19 @@
+<script setup>
+defineProps({
+  icon: { type: String, required: true },
+  name: { type: String, required: true },
+  desc: { type: String, default: '' },
+  website: { type: String, default: '' },
+  pan: { type: String, default: '' },
+})
+</script>
+
 <template>
   <div class="resource-card">
     <!-- 1. 桌面端视图 -->
     <div class="desktop-view">
       <div class="card-main">
-        <img :src="icon" :alt="name" />
+        <img :src="icon" :alt="name">
         <div class="card-text">
           <div
             class="card-title"
@@ -15,7 +25,9 @@
           >
             {{ name }}
           </div>
-          <div class="card-desc" v-if="desc">{{ desc }}</div>
+          <div v-if="desc" class="card-desc">
+            {{ desc }}
+          </div>
         </div>
       </div>
 
@@ -31,7 +43,7 @@
             >
               <path
                 d="M13.0607 8.11097L14.4749 9.52518C17.2086 12.2589 17.2086 16.691 14.4749 19.4247L14.1214 19.7782C11.3877 22.5119 6.95555 22.5119 4.22188 19.7782C1.48821 17.0446 1.48821 12.6124 4.22188 9.87874L5.6361 11.293C3.68348 13.2456 3.68348 16.4114 5.6361 18.364C7.58872 20.3166 10.7545 20.3166 12.7072 18.364L13.0607 18.0105C15.0133 16.0578 15.0133 12.892 13.0607 10.9394L11.6465 9.52518L13.0607 8.11097ZM19.7782 14.1214L18.364 12.7072C20.3166 10.7545 20.3166 7.58872 18.364 5.6361C16.4114 3.68348 13.2456 3.68348 11.293 5.6361L10.9394 5.98965C8.98678 7.94227 8.98678 11.1081 10.9394 13.0607L12.3536 14.4749L10.9394 15.8891L9.52518 14.4749C6.79151 11.7413 6.79151 7.30911 9.52518 4.57544L9.87874 4.22188C12.6124 1.48821 17.0446 1.48821 19.7782 4.22188C22.5119 6.95555 22.5119 11.3877 19.7782 14.1214Z"
-              ></path>
+              />
             </svg>
           </span>
           官网
@@ -47,7 +59,7 @@
             >
               <path
                 d="M13 13V18.585L14.8284 16.7574L16.2426 18.1716L12 22.4142L7.75736 18.1716L9.17157 16.7574L11 18.585V13H13ZM12 2C15.5934 2 18.5544 4.70761 18.9541 8.19395C21.2858 8.83154 23 10.9656 23 13.5C23 16.3688 20.8036 18.7246 18.0006 18.9776L18.0009 16.9644C19.6966 16.7214 21 15.2629 21 13.5C21 11.567 19.433 10 17.5 10C17.2912 10 17.0867 10.0183 16.8887 10.054C16.9616 9.7142 17 9.36158 17 9C17 6.23858 14.7614 4 12 4C9.23858 4 7 6.23858 7 9C7 9.36158 7.03838 9.7142 7.11205 10.0533C6.91331 10.0183 6.70879 10 6.5 10C4.567 10 3 11.567 3 13.5C3 15.2003 4.21241 16.6174 5.81986 16.934L6.00005 16.9646L6.00039 18.9776C3.19696 18.7252 1 16.3692 1 13.5C1 10.9656 2.71424 8.83154 5.04648 8.19411C5.44561 4.70761 8.40661 2 12 2Z"
-              ></path>
+              />
             </svg>
           </span>
           网盘
@@ -60,7 +72,7 @@
       <!-- 左侧大热区 -->
       <a :href="website || pan" target="_blank" class="mobile-main">
         <div class="mobile-main-content">
-          <img class="app-logo" :src="icon" :alt="name" />
+          <img class="app-logo" :src="icon" :alt="name">
           <div class="card-text">
             <div
               class="card-title"
@@ -73,7 +85,7 @@
             >
               {{ name }}
             </div>
-            <div class="card-desc" v-if="desc">{{ desc }}</div>
+            <div v-if="desc" class="card-desc">{{ desc }}</div>
           </div>
         </div>
 
@@ -95,16 +107,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-defineProps({
-  icon: { type: String, required: true },
-  name: { type: String, required: true },
-  desc: { type: String, default: "" },
-  website: { type: String, default: "" },
-  pan: { type: String, default: "" },
-});
-</script>
 
 <style scoped>
 .card-text {
@@ -359,5 +361,4 @@ h2 {
     margin-top: 0 !important;
   }
 }
-
 </style>

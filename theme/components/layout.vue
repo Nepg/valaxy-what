@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useSiteConfig } from 'valaxy'
+// import { useSiteConfig } from 'valaxy'
 import { useArknightsText, useArknightsTheme } from '../composables/config'
 
-const site = useSiteConfig()
+// const site = useSiteConfig()
 const theme = useArknightsTheme()
 const text = useArknightsText()
 </script>

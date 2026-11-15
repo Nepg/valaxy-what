@@ -19,7 +19,7 @@ const nav = computed(() => theme.value.nav.length
   <header class="ark-nav">
     <RouterLink to="/" class="ark-brand">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36">
-        <path d="M7 9 L12 25 L18 15 L24 25 L29 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+        <path d="M7 9 L12 25 L18 15 L24 25 L29 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
       </svg>
       <span>{{ site.title }}
         <!-- <small>FIELD NOTES / PERSONAL BLOG</small> -->

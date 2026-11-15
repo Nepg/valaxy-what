@@ -1,6 +1,7 @@
 ---
 title: windows资源整理
 ---
+
 <script setup>
 const categories = [
   {
@@ -39,7 +40,7 @@ const categories = [
 ,
   {
     title: "桌面、效率",
-    apps: [      
+    apps: [
       { icon: "/icons/nanazip.ico", name: "NanaZip", desc: "", website: "https://nanazip.org/", pan: "https://share.feijipan.com/s/xExo1FtC" },
       { icon: "/icons/hibituninstaller.png", name: "HiBit Uninstaller", desc: "卸载工具", website: "https://hibitsoft.ir/Uninstaller.html", pan: "https://wwanv.lanzoum.com/i8FX73ysrv3c" },
       { icon: "/icons/KeePassXC.svg", name: "KeePassXC", desc: "密码管理", website: "https://github.com/keepassxreboot/keepassxc", pan: "https://wwanv.lanzoum.com/izCoD3xuh98b" },
@@ -47,8 +48,8 @@ const categories = [
       { icon: "/icons/HandBrake.png", name: "HandBrake", desc: "视频格式转码", website: "https://handbrake.fr/downloads.php", pan: "https://wwanv.lanzoum.com/iqlCC3x6scfi" },
       { icon: "/icons/Snipaste.svg", name: "Snipaste", desc: "截图 / 贴图", website: "https://zh.snipaste.com/", pan: "https://wwanv.lanzoum.com/iySFm3x6rohg" },
       { icon: "/icons/Glance.ico", name: "Glance", desc: "截图翻译", website: "https://github.com/Harukaon/Glance", pan: "https://wwanv.lanzoum.com/ivFyp3y7sdde" },
-      { icon: "/icons/quickscan.png", name: "QuickScan", desc: "屏幕扫码工具", website: "https://github.com/yoli-mi/quickscan", pan: "https://share.feijipan.com/s/7vzFYZ0m" },   
-      { icon: "/icons/ContextMenuManager.ico", name: "ContextMenuManager", desc: "右键菜单管理", website: "https://bluepointlilac.github.io/ContextMenuManager/", pan: "https://wwanv.lanzoum.com/ip3Ty3x6rvlc" },  
+      { icon: "/icons/quickscan.png", name: "QuickScan", desc: "屏幕扫码工具", website: "https://github.com/yoli-mi/quickscan", pan: "https://share.feijipan.com/s/7vzFYZ0m" },
+      { icon: "/icons/ContextMenuManager.ico", name: "ContextMenuManager", desc: "右键菜单管理", website: "https://bluepointlilac.github.io/ContextMenuManager/", pan: "https://wwanv.lanzoum.com/ip3Ty3x6rvlc" },
       { icon: "/icons/FastCopy.ico", name: "FastCopy", desc: "快速复制", website: "https://fastcopy.jp/", pan: "https://wwanv.lanzoum.com/imjm83y7s6dc" }
 
     ]

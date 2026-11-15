@@ -2,8 +2,8 @@ name: Deploy demo
 on:
   push:
     branches:
-      - main            # 你的源码分支，master 就改成 master
-  workflow_dispatch:    # 保留手动重发能力
+      - main # 你的源码分支，master 就改成 master
+  workflow_dispatch: # 保留手动重发能力
 
 permissions:
   contents: read

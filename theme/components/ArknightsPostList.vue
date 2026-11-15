@@ -9,7 +9,7 @@ const query = shallowRef('')
 const tag = shallowRef('')
 const text = useArknightsText()
 const { $tO } = useValaxyI18n()
-const tags = computed(() => [...new Set(props.posts.flatMap(post => post.tags || []))].sort())
+// const tags = computed(() => [...new Set(props.posts.flatMap(post => post.tags || []))].sort())
 const filtered = computed(() => props.posts.filter((post) => {
   return (!tag.value || post.tags?.includes(tag.value))
     && ($tO(post.title) || '').toLocaleLowerCase().includes(query.value.trim().toLocaleLowerCase())

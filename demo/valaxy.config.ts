@@ -3,7 +3,7 @@ import { defineValaxyConfig } from 'valaxy'
 
 export default defineValaxyConfig<ThemeConfig>({
   vite: {
-    base: '/valaxy-what/',   // 例如 '/valaxy-theme-arknights/'
+    base: '/valaxy-what/', // 例如 '/valaxy-theme-arknights/'
   },
   theme: 'arknights',
   themeConfig: {

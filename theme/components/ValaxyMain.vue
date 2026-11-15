@@ -48,7 +48,7 @@ const outlineEnabled = computed(() => (props.frontmatter.outline ?? theme.value.
       <slot name="footer" />
     </slot>
     <p v-if="frontmatter.date" class="ark-eyebrow">
-        {{ text.published }} / {{ postDate(frontmatter.date) }}
+      {{ text.published }} / {{ postDate(frontmatter.date) }}
     </p>
   </main>
 </template>
@@ -57,9 +57,9 @@ const outlineEnabled = computed(() => (props.frontmatter.outline ?? theme.value.
 /* 桌面端：极宽的自适应网格 */
 .my-custom-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 120px; 
+  grid-template-columns: minmax(0, 1fr) 120px;
   gap: 60px;
-  max-width: 1400px; 
+  max-width: 1400px;
   margin: 0 auto;
 }
 

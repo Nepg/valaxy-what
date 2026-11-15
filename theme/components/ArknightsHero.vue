@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import type { Post } from 'valaxy'
-import { useSiteConfig, useValaxyI18n } from 'valaxy'
-import { useArknightsText, useArknightsTheme } from '../composables/config'
-import { postDate } from '../composables/post'
+// import { useSiteConfig, useValaxyI18n } from 'valaxy'
+// import { useArknightsText, useArknightsTheme } from '../composables/config'
 
 defineProps<{ featured?: Post, count: number }>()
-const site = useSiteConfig()
-const theme = useArknightsTheme()
-const text = useArknightsText()
-const { $tO } = useValaxyI18n()
+// const site = useSiteConfig()
+// const theme = useArknightsTheme()
+// const text = useArknightsText()
+// const { $tO } = useValaxyI18n()
 </script>
 
 <template>
+  <div />
   <!-- <section class="ark-hero" :aria-label="site.title">
     <div class="ark-hero-copy">
       <p class="ark-eyebrow">
