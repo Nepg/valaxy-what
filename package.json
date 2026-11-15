@@ -1,0 +1,39 @@
+{
+  "name": "valaxy-theme-arknights-workspace",
+  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@10.34.4",
+  "homepage": "https://arknights.valaxy.site/",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "build": "pnpm build:demo",
+    "build:demo": "pnpm --dir demo build",
+    "dev": "pnpm demo",
+    "demo": "pnpm --dir demo dev",
+    "lint": "eslint .",
+    "release": "pnpm --dir theme exec bumpp",
+    "typecheck": "vue-tsc --noEmit --skipLibCheck",
+    "test": "node scripts/verify-build.mjs",
+    "check": "pnpm lint && pnpm build && pnpm typecheck && pnpm test",
+    "pack:theme": "pnpm --dir theme pack --pack-destination ../artifacts"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:",
+    "@types/node": "catalog:",
+    "@unocss/eslint-plugin": "catalog:",
+    "@vueuse/core": "catalog:",
+    "bumpp": "catalog:",
+    "eslint": "catalog:",
+    "eslint-plugin-format": "catalog:",
+    "typescript": "catalog:",
+    "valaxy": "catalog:",
+    "valaxy-theme-arknights": "workspace:*",
+    "vite": "catalog:",
+    "vue": "catalog:",
+    "vue-i18n": "catalog:",
+    "vue-router": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}

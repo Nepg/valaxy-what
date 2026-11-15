@@ -1,0 +1,14 @@
+{
+  "name": "valaxy-theme-arknights-demo",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "valaxy build --ssg --log info",
+    "dev": "valaxy",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "valaxy": "catalog:",
+    "valaxy-theme-arknights": "workspace:*"
+  }
+}
