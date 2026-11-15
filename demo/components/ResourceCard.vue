@@ -111,6 +111,7 @@ defineProps({
 </template>
 
 <style scoped>
+/* 桌面端文本排版降噪 */
 .card-text {
   display: flex;
   flex-direction: column;
@@ -118,110 +119,157 @@ defineProps({
   overflow: hidden;
 }
 .card-title {
-  font-weight: 600;
-  color: var(--vp-c-text-1);
+  font-weight: 700;
+  color: var(--ark-ink);
   margin-bottom: 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: font-size 0.2s ease;
-
-  /* 桌面端强制统一大小，不管长短 */
   font-size: 16px;
+  letter-spacing: 0.5px;
 }
-
-/* 桌面端不需要变小，把这几个类清空，或者直接留给移动端用 */
 .card-desc {
-  font-size: 13px;
-  color: var(--vp-c-text-2);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ark-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: 0.5px;
 }
 
-/* 桌面端样式 (默认) */
+/* =========================================
+   桌面端卡片样式（工业级克制版）
+   ========================================= */
 .resource-card {
   position: relative;
   height: 90px;
-  border-radius: 12px;
-  background-color: var(--vp-c-bg-soft);
-  border: 1px solid rgba(255, 255, 255, 0);
+  border: none;
+  background-color: transparent; /* 完全透明 */
+  transition: all 0.2s linear;
   overflow: hidden;
-  transition:
-    border-color 0.25s,
-    box-shadow 0.25s;
 }
-.resource-card:hover {
-  border-color: var(--ark-accent);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+/* 悬浮时的背景层（极淡） */
+.resource-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--ark-surface);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 0;
 }
+.resource-card:hover::after {
+  opacity: 1;
+}
+
+/* 核心：左上角的对焦框线条 */
+.resource-card::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 8px;
+  height: 8px;
+  border-top: 1px solid var(--ark-accent);
+  border-left: 1px solid var(--ark-accent);
+  opacity: 0;
+  transform: translate(-4px, -4px); /* 初始稍微偏离，动画滑入 */
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+.resource-card:hover::before {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
 .desktop-view {
   position: absolute;
   inset: 0;
+  z-index: 1; /* 保证内容在背景层之上 */
 }
+
 .card-main {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   padding: 0 20px;
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
+  transition: opacity 0.2s ease;
 }
+
+/* 图标默认褪色，悬浮恢复彩色 */
 .card-main img {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   margin-right: 16px;
   object-fit: contain;
+  transition: all 0.3s ease;
 }
+.resource-card:hover .card-main img {
+  transform: scale(1.05); /* 极微小的放大 */
+}
+
+/* 悬浮后的操作面板 */
 .card-actions {
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  background-color: var(--vp-c-bg-soft);
+  background-color: transparent;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
+
 .resource-card:hover .card-main {
   opacity: 0;
-  transform: scale(0.95);
+  pointer-events: none;
 }
 .resource-card:hover .card-actions {
   opacity: 1;
   pointer-events: auto;
 }
+
+/* 操作按钮：极简到只剩下文字和线 */
 .action-btn {
   flex: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* 图标和文字并排 */
   align-items: center;
   justify-content: center;
+  gap: 8px;
   height: 100%;
   text-decoration: none !important;
+  color: var(--ark-muted) !important;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1px;
+  transition: all 0.2s ease;
+  position: relative;
+}
 
-  /* 1. 默认状态下，文字和图标是普通的灰色 */
-  color: var(--vp-c-text-2) !important;
-  font-weight: 500;
-  font-size: 14px;
-
-  /* 2. 加上 color 的过渡动画，让变色更顺滑 */
-  transition:
-    background-color 0.2s,
-    color 0.2s;
+/* 按钮间的半截细线分割 */
+.action-btn + .action-btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 30%;
+  bottom: 30%;
+  width: 1px;
+  background-color: var(--ark-line);
 }
 
 .action-btn:hover {
-  background-color: var(--vp-c-default-soft);
-  /* 3. 只有在悬浮当前这半边时，才变成品牌色 */
-  color: var(--ark-accent) !important;;
+  background-color: transparent; 
+  color: var(--ark-accent) !important; 
 }
+
 .action-btn .icon {
-  font-size: 20px;
-  margin-bottom: 8px;
+  font-size: 18px;
+  margin-bottom: 0; /* 取消之前向下的 margin */
 }
 
 /* 默认隐藏移动端视图 */
@@ -229,33 +277,36 @@ defineProps({
   display: none;
 }
 
-/* 移动端样式 (无边框紧凑列表版) */
+/* =========================================
+   移动端：纯正的终端列表风
+   ========================================= */
 @media (max-width: 768px) {
   .desktop-view {
     display: none;
   }
   .app-logo {
-    margin-left: 10px;
+    margin-left: 0;
   }
 
-  /* 1. 干掉卡片圆角、边框、背景，变成列表项 */
   .resource-card {
-    height: 64px;
+    height: 68px; /* 稍微加高一点点 */
     background-color: transparent;
-    border: 0;
-    border-bottom: 1px solid var(--vp-c-divider);
+    border: none;
+    border-bottom: 1px solid var(--ark-line);
     border-radius: 0;
-    box-shadow: none;
+  }
+  /* 干掉移动端的伪元素干扰 */
+  .resource-card::before,
+  .resource-card::after {
+    display: none;
   }
 
-  /* 2. 显示并重置布局 */
   .mobile-view {
     display: flex;
     align-items: stretch;
     width: 100%;
     height: 100%;
-    padding: 0; /* 左右留点空隙 */
-    /* padding-left: 16px;  */
+    padding: 0;
   }
 
   .mobile-main {
@@ -267,6 +318,7 @@ defineProps({
     overflow: hidden;
     text-decoration: none !important;
     color: inherit !important;
+    padding-left: 4px; /* 左侧留一点点白 */
   }
 
   .mobile-main-content {
@@ -276,90 +328,73 @@ defineProps({
   }
 
   .mobile-main-content img {
-    width: 32px;
-    height: 32px;
-    margin-right: 10px;
+    width: 36px;
+    height: 36px;
+    margin-right: 12px;
     object-fit: contain;
     flex-shrink: 0;
+    filter: none; /* 移动端保持彩色 */
   }
-  .title-short {
-    font-size: 15px !important;
-  }
-  .title-medium {
-    font-size: 14px !important;
-  }
-  .title-long {
-    font-size: 13px !important;
-  }
+  
+  .title-short { font-size: 15px !important; }
+  .title-medium { font-size: 14px !important; }
+  .title-long { font-size: 13px !important; }
 
-  /* 删掉了 font-size，只留 margin */
   .card-title {
     margin-bottom: 2px;
+    font-size: 15px;
+    letter-spacing: 0;
   }
   .card-desc {
     font-size: 12px;
+    color: var(--ark-muted);
   }
 
-  /* 右侧纯文字提示容器 */
   .mobile-hints {
     display: flex;
-    align-items: stretch; /* 关键：让子元素撑满高度 */
+    align-items: stretch;
     flex-shrink: 0;
     height: 100%;
   }
 
-  /* 纯文字提示本体 */
   .hint-text {
-    color: var(--vp-c-text-2) !important;
-    font-size: 13px;
+    color: var(--ark-muted) !important;
+    font-size: 12px;
     font-weight: 500;
-
-    /* 核心魔法：让 span 变成 flex 块并撑满高度 */
     display: flex;
     align-items: center;
     height: 100%;
-
-    /* 加上和网盘按钮一样的左右 padding */
-    padding: 0 19px;
+    padding: 0 16px;
     box-sizing: border-box;
+    letter-spacing: 1px;
   }
 
-  /* 3. 独立网盘按钮变方、撑满高度 */
+  /* 移动端独立网盘按钮：纯文字，无任何底色 */
   .mobile-pan-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--vp-c-default-soft);
-    color: var(--vp-c-brand-1) !important;
+    background-color: transparent;
+    color: var(--ark-accent) !important;
     font-weight: 600;
-    font-size: 13px;
+    font-size: 12px;
+    letter-spacing: 1px;
     height: 100% !important;
-    padding: 0 19px;
+    padding: 0 16px;
     text-decoration: none !important;
     flex-shrink: 0;
+    position: relative;
   }
-}
-
-h2 {
-  border-top: none !important;
-  padding-top: 0 !important;
-  margin-top: 40px !important;
-  margin-bottom: 12px !important;
-}
-
-/* 第一个分类不需要顶部间距 */
-.category-block:first-child h2 {
-  margin-top: 0 !important;
-}
-
-/* 移动端微调 */
-@media (max-width: 768px) {
-  h2 {
-    margin-top: 30px !important;
-    margin-bottom: 10px !important;
-  }
-  .category-block:first-child h2 {
-    margin-top: 0 !important;
+  
+  /* 移动端网盘按钮的极细竖线 */
+  .mobile-pan-btn::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 30%;
+    bottom: 30%;
+    width: 1px;
+    background-color: var(--ark-line);
   }
 }
 </style>

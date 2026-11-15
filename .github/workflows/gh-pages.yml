@@ -34,7 +34,7 @@ jobs:
         env:
           VITE_BASE: /valaxy-what/
           SITE_URL: https://Nepg.github.io/valaxy-what/
-      # 👇 把这里的 v4 改成 v3
+      #  v4 改成 v3
       - uses: actions/upload-pages-artifact@v3
         with:
           path: demo/dist
