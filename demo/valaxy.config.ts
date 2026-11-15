@@ -2,6 +2,9 @@ import type { ThemeConfig } from 'valaxy-theme-arknights'
 import { defineValaxyConfig } from 'valaxy'
 
 export default defineValaxyConfig<ThemeConfig>({
+  vite: {
+    base: '/valaxy-what/',   // 例如 '/valaxy-theme-arknights/'
+  },
   theme: 'arknights',
   themeConfig: {
     eyebrow: 'BORDERLAND / FIELD NOTES',

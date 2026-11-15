@@ -541,11 +541,11 @@ body {
   font-size: 16px;
   margin-bottom: 24px;
 }
-.ark-reading-grid {
-  /*display: grid;
+/* .ark-reading-grid {
+  display: grid;
   grid-template-columns: minmax(0, 760px);
-  gap: 64px;*/
-}
+  gap: 64px;
+} */
 .ark-reading-grid.ark-has-toc {
   grid-template-columns: minmax(0, 760px) minmax(150px, 1fr);
 }
