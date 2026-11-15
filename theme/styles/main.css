@@ -5,7 +5,7 @@
   --ark-muted: #59646b;
   --ark-line: #cdd3d3;
   --ark-link: #176b87;
-  --ark-accent: #ffd84a;
+  --ark-accent: #0078d6;
   --ark-font: 'Helvetica Neue', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   --ark-display: 'Songti SC', 'Noto Serif SC', 'STSong', Georgia, serif;
   --ark-mono: 'SFMono-Regular', Consolas, monospace;
@@ -18,6 +18,7 @@
 }
 
 html.dark {
+  --ark-accent: #4cc2ff;
   --ark-paper: #151a1e;
   --ark-surface: #1b2227;
   --ark-ink: #e7ebea;
@@ -506,11 +507,11 @@ body {
 }
 .ark-reading {
   padding: 56px 0 80px;
-  max-width: 1060px;
+  /*max-width: 1060px;*/
   margin-inline: auto;
 }
 .ark-article-header {
-  max-width: 790px;
+  /*max-width: 790px;*/
   margin-bottom: 44px;
 }
 .ark-back {
@@ -541,9 +542,9 @@ body {
   margin-bottom: 24px;
 }
 .ark-reading-grid {
-  display: grid;
+  /*display: grid;
   grid-template-columns: minmax(0, 760px);
-  gap: 64px;
+  gap: 64px;*/
 }
 .ark-reading-grid.ark-has-toc {
   grid-template-columns: minmax(0, 760px) minmax(150px, 1fr);

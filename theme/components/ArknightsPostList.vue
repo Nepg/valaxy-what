@@ -24,10 +24,12 @@ function reset() {
   <section class="ark-archive" aria-labelledby="ark-archive-title">
     <div class="ark-section-head">
       <h2 id="ark-archive-title">
-        {{ title }}<span class="ark-mono"> / ARCHIVE</span>
-      </h2><span class="ark-result-count" role="status">{{ filtered.length }} {{ text.results }}</span>
+        {{ title }}
+        <!-- <span class="ark-mono"> / ARCHIVE</span> -->
+      </h2>
+      <span class="ark-result-count" role="status">{{ filtered.length }} {{ text.results }}</span>
     </div>
-    <div class="ark-filters">
+    <!-- <div class="ark-filters">
       <div class="ark-tags" role="group" :aria-label="text.tags">
         <button type="button" :aria-pressed="tag === ''" @click="tag = ''">
           {{ text.all }}
@@ -37,7 +39,7 @@ function reset() {
         </button>
       </div>
       <label class="ark-search"><span class="ark-sr-only">{{ text.search }}</span><input v-model="query" type="search" :placeholder="text.search"><span aria-hidden="true">⌕</span></label>
-    </div>
+    </div> -->
     <div v-if="filtered.length" class="ark-posts">
       <ArknightsPostCard v-for="(post, index) in filtered" :key="post.path" :post="post" :index="index" />
     </div>

@@ -6,7 +6,7 @@ export default defineValaxyConfig<ThemeConfig>({
   themeConfig: {
     eyebrow: 'BORDERLAND / FIELD NOTES',
     motto: '在边界之外，记录日常。',
-    nav: [{ text: '首页', link: '/' }, { text: '文章归档', link: '/archives/' }, { text: '关于', link: '/about/' }],
+    nav: [{ text: '首页', link: '/' }],
     footer: '记录值得留下的事。',
   },
 })

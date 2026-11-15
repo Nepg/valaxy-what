@@ -12,7 +12,7 @@ const { $tO } = useValaxyI18n()
 </script>
 
 <template>
-  <section class="ark-hero" :aria-label="site.title">
+  <!-- <section class="ark-hero" :aria-label="site.title">
     <div class="ark-hero-copy">
       <p class="ark-eyebrow">
         <span aria-hidden="true" /> {{ theme.eyebrow }}
@@ -44,5 +44,5 @@ const { $tO } = useValaxyI18n()
         </RouterLink>
       </div>
     </div>
-  </section>
+  </section> -->
 </template>
