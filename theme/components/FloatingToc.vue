@@ -55,7 +55,11 @@ function handleLinkClick(e: Event) {
   handleClick(e)
   closeDrawer()
 }
-
+// 回到顶部
+function handleBackToTop() {
+  scrollPosition = 0 // 把目标位置改成 0
+  closeDrawer()      // 借用现成的关闭逻辑，会自动滚动到 0
+}
 // 监听 Esc 键关闭
 function handleKeydown(e: KeyboardEvent) {
   if (e.key === 'Escape' && isOpen.value) {
@@ -98,7 +102,7 @@ onUnmounted(() => {
 
     <aside class="mobile-toc-drawer" :class="[{ 'is-open': isOpen }]">
       <div class="toc-header">
-        <div class="toc-title">本文目录</div>
+        <div class="toc-title">目录</div>
         <button class="close-btn" @click="closeDrawer">✕</button>
       </div>
       <ul class="toc-list">
@@ -106,6 +110,10 @@ onUnmounted(() => {
           <a :href="header.link" @click="handleLinkClick">{{ header.title }}</a>
         </li>
       </ul>
+      <!-- 回到顶部按钮 -->
+      <div class="back-to-top" @click="handleBackToTop">
+        回到顶部
+      </div>
     </aside>
   </div>
 </template>
@@ -180,20 +188,24 @@ onUnmounted(() => {
     position: fixed; inset: 0; background-color: transparent; z-index: 999;
   }
 
+  /* 抽屉变为 flex 容器，自身不滚动 */
   .mobile-toc-drawer {
     position: fixed;
     top: 0; right: 0; bottom: 0;
     width: 260px;
     background-color: var(--ark-paper);
     z-index: 1000;
-    padding: 24px;
+    
+    padding: 0; /* 去掉内边距，交给子元素处理 */
+    display: flex;
+    flex-direction: column; /* 纵向排列：头 - 列表 - 底部 */
+    
     box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15); 
     border-left: 1px solid var(--ark-line);
     transform: translateX(100%);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow-y: auto;
     
-    /* 👇 核心魔法：当抽屉内部滚动到底部/顶部时，阻止滚动链传递给底层 body */
+    overflow: hidden; /* 去掉整体滚动，交给列表去滚 */
     overscroll-behavior: contain; 
   }
 
@@ -201,11 +213,13 @@ onUnmounted(() => {
     transform: translateX(0);
   }
 
+  /* 头部固定 */
   .toc-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    padding: 24px 24px 16px; 
+    flex-shrink: 0; /* 防止被压缩 */
   }
   
   .close-btn {
@@ -219,10 +233,39 @@ onUnmounted(() => {
   }
   .close-btn:hover { color: var(--ark-ink); }
 
+  /* 中间列表独立滚动 */
+  .toc-list {
+    flex: 1; /* 占据剩余所有空间 */
+    overflow-y: auto; /* 只有列表内部可以滚动 */
+    padding: 0 24px; /* 给列表加上左右边距 */
+    overscroll-behavior: contain;
+  }
+
   .toc-item { margin-bottom: 0; }
   .toc-item a {
     padding: 12px 0;
     font-size: 15px;
+  }
+
+  /* 底部按钮固定 */
+  .back-to-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 24px;
+    /* color: var(--ark-accent); */
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border-top: 1px solid var(--ark-line);
+    background-color: var(--ark-paper);
+    flex-shrink: 0; /* 防止被压缩 */
+    transition: opacity 0.2s;
+  }
+  
+  .back-to-top:hover {
+    opacity: 0.8;
   }
 }
 
