@@ -2,8 +2,8 @@ name: Deploy demo
 on:
   push:
     branches:
-      - main # 你的源码分支，master 就改成 master
-  workflow_dispatch: # 保留手动重发能力
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -32,10 +32,10 @@ jobs:
         working-directory: ./demo
         run: pnpm build
         env:
-          # 注意：这里换成你自己的仓库名
           VITE_BASE: /valaxy-what/
           SITE_URL: https://Nepg.github.io/valaxy-what/
-      - uses: actions/upload-pages-artifact@v4
+      # 👇 把这里的 v4 改成 v3
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: demo/dist
       - id: deployment
