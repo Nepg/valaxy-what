@@ -8,7 +8,8 @@ const text = useArknightsText()
 </script>
 
 <template>
-  <div class="ark-shell" :style="{ '--ark-accent': theme.accent }">
+  <!-- <div class="ark-shell" :style="{ '--ark-accent': theme.accent }"> -->
+    <div class="ark-shell"> 
     <a class="ark-skip" href="#ark-main">{{ text.skip }}</a>
     <ArknightsNav />
     <slot><RouterView /></slot>

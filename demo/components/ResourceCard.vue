@@ -216,9 +216,8 @@ defineProps({
 
 .action-btn:hover {
   background-color: var(--vp-c-default-soft);
-
   /* 3. 只有在悬浮当前这半边时，才变成品牌色 */
-  color: var(--vp-c-brand-1) !important;
+  color: var(--ark-accent) !important;;
 }
 .action-btn .icon {
   font-size: 20px;

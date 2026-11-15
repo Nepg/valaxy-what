@@ -35,9 +35,17 @@ const categories = [
   </div>
 </div>
 
-<style scoped>
-/* 覆盖当前页面分类标题的默认样式 */
-.vp-doc h2 {
+<style>
+/* 1. 就是你想要的自适应卡片网格 */
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+/* 2. 覆盖分类标题的默认样式（去掉了 scoped，直接作用于全局） */
+h2 {
   border-top: none !important;
   padding-top: 0 !important;
   margin-top: 40px !important;
@@ -49,9 +57,9 @@ const categories = [
   margin-top: 0 !important;
 }
 
-/* 移动端微调 */
+/* 3. 移动端微调 */
 @media (max-width: 768px) {
-  .vp-doc h2 {
+  h2 {
     margin-top: 30px !important;
     margin-bottom: 10px !important;
   }
