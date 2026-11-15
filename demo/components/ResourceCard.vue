@@ -35,36 +35,12 @@ defineProps({
 
       <div class="card-actions">
         <a v-if="website" :href="website" target="_blank" class="action-btn">
-          <span class="icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="22"
-              height="22"
-              fill="currentColor"
-            >
-              <path
-                d="M13.0607 8.11097L14.4749 9.52518C17.2086 12.2589 17.2086 16.691 14.4749 19.4247L14.1214 19.7782C11.3877 22.5119 6.95555 22.5119 4.22188 19.7782C1.48821 17.0446 1.48821 12.6124 4.22188 9.87874L5.6361 11.293C3.68348 13.2456 3.68348 16.4114 5.6361 18.364C7.58872 20.3166 10.7545 20.3166 12.7072 18.364L13.0607 18.0105C15.0133 16.0578 15.0133 12.892 13.0607 10.9394L11.6465 9.52518L13.0607 8.11097ZM19.7782 14.1214L18.364 12.7072C20.3166 10.7545 20.3166 7.58872 18.364 5.6361C16.4114 3.68348 13.2456 3.68348 11.293 5.6361L10.9394 5.98965C8.98678 7.94227 8.98678 11.1081 10.9394 13.0607L12.3536 14.4749L10.9394 15.8891L9.52518 14.4749C6.79151 11.7413 6.79151 7.30911 9.52518 4.57544L9.87874 4.22188C12.6124 1.48821 17.0446 1.48821 19.7782 4.22188C22.5119 6.95555 22.5119 11.3877 19.7782 14.1214Z"
-              />
-            </svg>
-          </span>
-          官网
+          <span>官网</span>
+          <span class="btn-index">01</span> <!-- 加入序号 -->
         </a>
         <a v-if="pan" :href="pan" target="_blank" class="action-btn">
-          <span class="icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              fill="currentColor"
-            >
-              <path
-                d="M13 13V18.585L14.8284 16.7574L16.2426 18.1716L12 22.4142L7.75736 18.1716L9.17157 16.7574L11 18.585V13H13ZM12 2C15.5934 2 18.5544 4.70761 18.9541 8.19395C21.2858 8.83154 23 10.9656 23 13.5C23 16.3688 20.8036 18.7246 18.0006 18.9776L18.0009 16.9644C19.6966 16.7214 21 15.2629 21 13.5C21 11.567 19.433 10 17.5 10C17.2912 10 17.0867 10.0183 16.8887 10.054C16.9616 9.7142 17 9.36158 17 9C17 6.23858 14.7614 4 12 4C9.23858 4 7 6.23858 7 9C7 9.36158 7.03838 9.7142 7.11205 10.0533C6.91331 10.0183 6.70879 10 6.5 10C4.567 10 3 11.567 3 13.5C3 15.2003 4.21241 16.6174 5.81986 16.934L6.00005 16.9646L6.00039 18.9776C3.19696 18.7252 1 16.3692 1 13.5C1 10.9656 2.71424 8.83154 5.04648 8.19411C5.44561 4.70761 8.40661 2 12 2Z"
-              />
-            </svg>
-          </span>
-          网盘
+          <span>网盘</span>
+          <span class="btn-index">02</span> <!-- 加入序号 -->
         </a>
       </div>
     </div>
@@ -91,6 +67,7 @@ defineProps({
           </div>
         </div>
 
+        <!-- 恢复为原本的纯文本提示，不嵌套 a 标签 -->
         <div class="mobile-hints">
           <span v-if="website" class="hint-text">官网</span>
           <span v-if="!website && pan" class="hint-text">网盘</span>
@@ -111,7 +88,13 @@ defineProps({
 </template>
 
 <style scoped>
-/* 桌面端文本排版降噪 */
+/* 定义入场动画 */
+@keyframes akEnter {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 文本排版降噪 */
 .card-text {
   display: flex;
   flex-direction: column;
@@ -119,16 +102,22 @@ defineProps({
   overflow: hidden;
 }
 .card-title {
+  font-family: var(--ark-display); 
   font-weight: 700;
   color: var(--ark-ink);
   margin-bottom: 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 16px;
+  font-size: 17px; 
   letter-spacing: 0.5px;
 }
+html.dark .card-title {
+  color: var(--ak-text-primary);
+  text-shadow: 0 0 1px var(--ak-text-primary); 
+}
 .card-desc {
+  font-family: var(--ark-font); 
   font-size: 12px;
   font-weight: 400;
   color: var(--ark-muted);
@@ -139,57 +128,92 @@ defineProps({
 }
 
 /* =========================================
-   桌面端卡片样式（工业级克制版）
+   桌面端卡片样式
+   ========================================= */
+/* =========================================
+   卡片本体
    ========================================= */
 .resource-card {
+  animation: akEnter 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
   position: relative;
   height: 90px;
   border: none;
-  background-color: transparent; /* 完全透明 */
-  transition: all 0.2s linear;
+  background-color: transparent; 
+  transition: transform 0.2s ease;
   overflow: hidden;
 }
 
-/* 悬浮时的背景层（极淡） */
+/* 👇 核心改动 1：干掉那坨大白底，换成极淡的透明光晕 */
+.resource-card:hover {
+  transform: translateY(-2px); /* 悬浮时整个卡片微微上浮 */
+}
+
 .resource-card::after {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: var(--ark-surface);
+  /* 用半透明背景色代替纯色，浅色下是极淡的灰，深色下是极淡的光 */
+  background-color: var(--ark-surface); 
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s ease;
   z-index: 0;
-}
-.resource-card:hover::after {
-  opacity: 1;
+  /* 圆角稍微收一点，感觉更硬朗 */
+  border-radius: 4px;
 }
 
-/* 核心：左上角的对焦框线条 */
+.resource-card:hover::after { 
+  opacity: 0.4; /* 👈 透明度调低，不要那么刺眼 */
+}
+html.dark .resource-card:hover::after { 
+  opacity: 0.15; /* 👈 深色模式下只有极其微弱的背景辉光 */
+}
+
+/* 👇 核心改动 2：对焦框大升级，左下角和右上角呼应 */
 .resource-card::before {
   content: '';
   position: absolute;
-  top: 12px;
-  left: 12px;
-  width: 8px;
-  height: 8px;
+  top: 8px;
+  left: 8px;
+  width: 10px;
+  height: 10px;
   border-top: 1px solid var(--ark-accent);
   border-left: 1px solid var(--ark-accent);
   opacity: 0;
-  transform: translate(-4px, -4px); /* 初始稍微偏离，动画滑入 */
-  transition: all 0.2s ease;
+  transform: translate(-2px, -2px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2;
+  pointer-events: none;
 }
-.resource-card:hover::before {
-  opacity: 1;
+/* 用伪元素再画一个右下角的角标 */
+.card-main::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 10px;
+  height: 10px;
+  border-bottom: 1px solid var(--ark-accent);
+  border-right: 1px solid var(--ark-accent);
+  opacity: 0;
+  transform: translate(2px, 2px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.resource-card:hover::before,
+.resource-card:hover .card-main::after {
+  opacity: 0.7; /* 不要全亮，留点克制 */
   transform: translate(0, 0);
 }
 
 .desktop-view {
   position: absolute;
   inset: 0;
-  z-index: 1; /* 保证内容在背景层之上 */
+  z-index: 1;
 }
 
+/* 隐藏内容层 */
 .card-main {
   position: absolute;
   inset: 0;
@@ -198,8 +222,6 @@ defineProps({
   padding: 0 20px;
   transition: opacity 0.2s ease;
 }
-
-/* 图标默认褪色，悬浮恢复彩色 */
 .card-main img {
   width: 44px;
   height: 44px;
@@ -207,11 +229,11 @@ defineProps({
   object-fit: contain;
   transition: all 0.3s ease;
 }
-.resource-card:hover .card-main img {
-  transform: scale(1.05); /* 极微小的放大 */
+html.dark .card-main img {
+  filter: saturate(0.95) opacity(0.95);
 }
 
-/* 悬浮后的操作面板 */
+/* 👇 核心改动 3：操作面板的动画更有仪式感 */
 .card-actions {
   position: absolute;
   inset: 0;
@@ -221,7 +243,8 @@ defineProps({
   background-color: transparent;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.25s ease;
+  z-index: 2;
 }
 
 .resource-card:hover .card-main {
@@ -233,13 +256,14 @@ defineProps({
   pointer-events: auto;
 }
 
-/* 操作按钮：极简到只剩下文字和线 */
+/* 操作按钮 */
 .action-btn {
+  font-family: var(--ark-font); 
   flex: 1;
   display: flex;
-  flex-direction: row; /* 图标和文字并排 */
+  flex-direction: row; 
   align-items: center;
-  justify-content: center;
+  justify-content: center; 
   gap: 8px;
   height: 100%;
   text-decoration: none !important;
@@ -249,9 +273,14 @@ defineProps({
   letter-spacing: 1px;
   transition: all 0.2s ease;
   position: relative;
+  
+  /* 文字默认往下偏移一点点，悬浮时上浮 */
+  transform: translateY(4px);
+}
+.resource-card:hover .action-btn {
+  transform: translateY(0);
 }
 
-/* 按钮间的半截细线分割 */
 .action-btn + .action-btn::before {
   content: '';
   position: absolute;
@@ -267,39 +296,42 @@ defineProps({
   color: var(--ark-accent) !important; 
 }
 
-.action-btn .icon {
-  font-size: 18px;
-  margin-bottom: 0; /* 取消之前向下的 margin */
+.action-btn .btn-index {
+  font-family: var(--ak-font-mono); 
+  font-size: 10px;
+  color: var(--ak-text-secondary);
+  opacity: 0.5;
+  margin-left: 4px;
+  transition: all 0.2s ease;
 }
 
-/* 默认隐藏移动端视图 */
+.action-btn:hover .btn-index {
+  color: var(--ark-accent);
+  opacity: 1;
+}
+
+/* =========================================
+   移动端视图
+   ========================================= */
 .mobile-view {
   display: none;
 }
 
-/* =========================================
-   移动端：纯正的终端列表风
-   ========================================= */
 @media (max-width: 768px) {
-  .desktop-view {
-    display: none;
-  }
-  .app-logo {
-    margin-left: 0;
-  }
+  .desktop-view { display: none; }
+  .app-logo { margin-left: 0; }
 
   .resource-card {
-    height: 68px; /* 稍微加高一点点 */
+    animation: none; /* 移动端不需要入场动画，滑动即可 */
+    height: 68px;
     background-color: transparent;
     border: none;
     border-bottom: 1px solid var(--ark-line);
     border-radius: 0;
   }
-  /* 干掉移动端的伪元素干扰 */
+  
   .resource-card::before,
-  .resource-card::after {
-    display: none;
-  }
+  .resource-card::after { display: none; }
 
   .mobile-view {
     display: flex;
@@ -318,7 +350,7 @@ defineProps({
     overflow: hidden;
     text-decoration: none !important;
     color: inherit !important;
-    padding-left: 4px; /* 左侧留一点点白 */
+    padding-left: 4px;
   }
 
   .mobile-main-content {
@@ -333,7 +365,11 @@ defineProps({
     margin-right: 12px;
     object-fit: contain;
     flex-shrink: 0;
-    filter: none; /* 移动端保持彩色 */
+  }
+  
+  /* 👇 修复了 0. 的笔误，改为 0.75 */
+  html.dark .mobile-main-content img {
+    filter: saturate(0.75); 
   }
   
   .title-short { font-size: 15px !important; }
@@ -341,7 +377,6 @@ defineProps({
   .title-long { font-size: 13px !important; }
 
   .card-title {
-    margin-bottom: 2px;
     font-size: 15px;
     letter-spacing: 0;
   }
@@ -369,7 +404,6 @@ defineProps({
     letter-spacing: 1px;
   }
 
-  /* 移动端独立网盘按钮：纯文字，无任何底色 */
   .mobile-pan-btn {
     display: flex;
     align-items: center;
@@ -386,7 +420,6 @@ defineProps({
     position: relative;
   }
   
-  /* 移动端网盘按钮的极细竖线 */
   .mobile-pan-btn::before {
     content: '';
     position: absolute;
@@ -396,5 +429,9 @@ defineProps({
     width: 1px;
     background-color: var(--ark-line);
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resource-card { animation: none; }
 }
 </style>
