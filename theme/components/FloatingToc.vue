@@ -199,7 +199,6 @@ onUnmounted(() => {
   background-color: var(--ark-accent);
 }
 
-/* ... 桌面端、移动端原有代码保持不变 ... */
 .desktop-toc {
   position: sticky; 
   top: 100px; /* 吸附后距离屏幕顶部的距离 */
@@ -208,7 +207,7 @@ onUnmounted(() => {
   padding-left: 20px;
   border-left: 1px dashed var(--ark-line);
   
-  /* 治好抖动的两剂猛药 */
+  /* 治抖动 */
   align-self: start; /* 让它保持自身高度，不被父元素拉伸 */
   will-change: transform; /* 提示浏览器提前优化渲染层，滚动更丝滑 */
   
@@ -216,10 +215,10 @@ onUnmounted(() => {
   transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
 }
 
-/* 如果你想让它吸附得更稳，可以在 hover 时稍微下沉一点点 */
-.desktop-toc:hover {
+/* 目录 hover 时稍微下沉一点点 */
+/* .desktop-toc:hover {
   top: 110px; 
-}
+} */
 .mobile-toc-wrapper { display: none; }
 
 @media (max-width: 1024px) {
