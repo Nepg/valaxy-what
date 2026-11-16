@@ -47,8 +47,9 @@ function handleLinkClick(e: Event, link: string) {
 }
 
 function handleBackToTop() {
-  scrollPosition = 0
-  closeDrawer()
+  scrollPosition = 0 // 把目标位置改成 0
+  activeId.value = '' // 核心修复：手动清空激活状态
+  closeDrawer()      // 借用现成的关闭逻辑，会自动滚动到 0
 }
 
 function handleKeydown(e: KeyboardEvent) {
@@ -179,13 +180,13 @@ onUnmounted(() => {
 .level-3 a::before { width: 10px; }
 .level-4 a::before { width: 16px; }
 
-/* 👇 核心新增：激活状态（雷达锁定）的样式 */
+/* 核心新增：激活状态（雷达锁定）的样式 */
 .toc-item.is-active a {
   color: var(--ark-ink); /* 文字变亮 */
   font-weight: 600; /* 微微加粗 */
 }
 .toc-item.is-active a::before {
-  width: 14px; /* 线条拉长 */
+  width: 12px; /* 线条拉长 */
   background-color: var(--ark-accent); /* 亮起战术蓝 */
 }
 
@@ -194,14 +195,30 @@ onUnmounted(() => {
   color: var(--ark-ink);
 }
 .toc-item a:hover::before {
-  width: 16px; 
+  width: 12px; 
   background-color: var(--ark-accent);
 }
 
 /* ... 桌面端、移动端原有代码保持不变 ... */
 .desktop-toc {
-  position: sticky; top: 100px; max-height: calc(100vh - 160px);
-  overflow-y: auto; padding-left: 20px; border-left: 1px dashed var(--ark-line);
+  position: sticky; 
+  top: 100px; /* 吸附后距离屏幕顶部的距离 */
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+  padding-left: 20px;
+  border-left: 1px dashed var(--ark-line);
+  
+  /* 治好抖动的两剂猛药 */
+  align-self: start; /* 让它保持自身高度，不被父元素拉伸 */
+  will-change: transform; /* 提示浏览器提前优化渲染层，滚动更丝滑 */
+  
+  /* 加一点极微弱的过渡，让吸附的那一瞬间有“灵魂” */
+  transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+}
+
+/* 如果你想让它吸附得更稳，可以在 hover 时稍微下沉一点点 */
+.desktop-toc:hover {
+  top: 110px; 
 }
 .mobile-toc-wrapper { display: none; }
 
@@ -209,6 +226,7 @@ onUnmounted(() => {
   .desktop-toc { display: none; }
   .mobile-toc-wrapper { display: block; }
   .mobile-toc-btn {
+    right: 48px;
     height: 44px; width: 44px; position: fixed; top: 90px; z-index: 100; padding: 0;
     display: flex; align-items: center; justify-content: center;
     background: var(--ark-surface); border: 1px solid var(--ark-line); color: var(--ark-ink);
@@ -242,6 +260,12 @@ onUnmounted(() => {
     flex-shrink: 0; transition: background-color 0.2s;
   }
   .back-to-top:hover { background-color: var(--ark-surface); }
+  .toc-item.is-active a::before {
+    width: 10px; /* 线条拉长 */
+  }
+  .toc-item a:hover::before {
+  width: 10px; 
+}
 }
 
 @media (max-width: 1000px) { .mobile-toc-btn { right: 32px; } }
