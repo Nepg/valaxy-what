@@ -220,7 +220,7 @@ html.dark .resource-card:hover::after {
   display: flex;
   align-items: center;
   padding: 0 20px;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s ease;
 }
 .card-main img {
   width: 44px;
@@ -239,7 +239,7 @@ html.dark .resource-card:hover::after {
   background-color: transparent;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.3s ease;
   z-index: 2;
 }
 
@@ -265,13 +265,13 @@ html.dark .resource-card:hover::after {
   text-decoration: none !important;
   color: var(--ark-muted) !important;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 1px;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   position: relative;
   
   /* 文字默认往下偏移一点点，悬浮时上浮 */
-  transform: translateY(4px);
+  transform: translateY(5px);
 }
 .resource-card:hover .action-btn {
   transform: translateY(0);
@@ -298,7 +298,7 @@ html.dark .resource-card:hover::after {
   color: var(--ak-text-secondary);
   opacity: 0.5;
   margin-left: 4px;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .action-btn:hover .btn-index {

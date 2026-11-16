@@ -7,73 +7,99 @@ const flatten = (entries: any[]): any[] => entries.flatMap(entry => [entry, ...f
 const flatHeaders = computed(() => flatten(headers.value || []))
 
 const isOpen = ref(false)
-const isAnimating = ref(false) // 用于防止动画期间重复点击
-let scrollPosition = 0 // 记录打开前的滚动位置
+const isAnimating = ref(false)
+let scrollPosition = 0
+
+// 👇 新增：记录当前激活的标题 ID
+const activeId = ref('')
 
 // 统一处理打开逻辑
 function openDrawer() {
   if (isOpen.value || isAnimating.value) return
   isAnimating.value = true
-  
-  // 1. 记录当前滚动位置
   scrollPosition = window.scrollY
-  
-  // 2. 锁死 body 并固定位置，防止高度坍缩和宽度抖动
   document.body.style.position = 'fixed'
   document.body.style.top = `-${scrollPosition}px`
   document.body.style.width = '100%'
-  document.body.style.overflowY = 'scroll' // 保持右侧滚动条占位（部分浏览器有效）
-  
+  document.body.style.overflowY = 'scroll'
   isOpen.value = true
-  
-  setTimeout(() => {
-    isAnimating.value = false
-  }, 300) // 与 CSS 过渡动画时间保持一致
+  setTimeout(() => { isAnimating.value = false }, 300)
 }
 
-// 统一处理关闭逻辑（遮罩、按钮、Esc、链接点击都走这里）
+// 统一处理关闭逻辑
 function closeDrawer() {
   if (!isOpen.value || isAnimating.value) return
   isAnimating.value = true
   isOpen.value = false
-  
-  // 1. 还原 body 样式
   document.body.style.position = ''
   document.body.style.top = ''
   document.body.style.width = ''
   document.body.style.overflowY = ''
-  
-  // 2. 瞬间还原滚动位置（没有平滑滚动，直接归位）
   window.scrollTo(0, scrollPosition)
-  
-  setTimeout(() => {
-    isAnimating.value = false
-  }, 300)
+  setTimeout(() => { isAnimating.value = false }, 300)
 }
 
-function handleLinkClick(e: Event) {
+function handleLinkClick(e: Event, link: string) {
   handleClick(e)
   closeDrawer()
+  // 👇 点击时立即激活，不等滚动监听
+  activeId.value = link.replace('#', '')
 }
-// 回到顶部
+
 function handleBackToTop() {
-  scrollPosition = 0 // 把目标位置改成 0
-  closeDrawer()      // 借用现成的关闭逻辑，会自动滚动到 0
+  scrollPosition = 0
+  closeDrawer()
 }
-// 监听 Esc 键关闭
+
 function handleKeydown(e: KeyboardEvent) {
   if (e.key === 'Escape' && isOpen.value) {
     closeDrawer()
   }
 }
 
+// 👇 新增：滚动监听（雷达锁定）逻辑
+let observer: IntersectionObserver | null = null
+
+const initObserver = () => {
+  if (observer) observer.disconnect()
+
+  // 等待 DOM 渲染完毕后，获取文章内的所有标题
+  nextTick(() => {
+    // Valaxy 的文章内容通常在 markdown-body 或类似容器里，这里直接抓取所有带 id 的标题
+    const headings = Array.from(document.querySelectorAll('h2[id], h3[id], h4[id]'))
+    
+    observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // 当标题进入视口（或者进入视口顶部某个区域时）
+          if (entry.isIntersecting) {
+            activeId.value = entry.target.id
+          }
+        })
+      },
+      {
+        rootMargin: '0px 0px -80% 0px', // 当标题滚动到屏幕顶部 20% 区域时触发
+        threshold: 0
+      }
+    )
+
+    headings.forEach((heading) => observer?.observe(heading))
+  })
+}
+
 onMounted(() => {
   window.addEventListener('keydown', handleKeydown)
+  initObserver()
+})
+
+// 监听目录数据变化（比如切换文章时），重新初始化雷达
+watch(flatHeaders, () => {
+  initObserver()
 })
 
 onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown)
-  // 防止组件销毁时还在锁死状态
+  if (observer) observer.disconnect()
   if (isOpen.value) {
     document.body.style.position = ''
     document.body.style.top = ''
@@ -85,10 +111,15 @@ onUnmounted(() => {
 
 <template>
   <aside class="desktop-toc">
-    <div class="toc-title">目录</div>
+    <div class="toc-title"><span>//</span> 目录</div>
     <ul class="toc-list">
-      <li v-for="header in flatHeaders" :key="header.link" class="toc-item" :class="[`level-${header.level}`]">
-        <a :href="header.link" @click="handleLinkClick">{{ header.title }}</a>
+      <li 
+        v-for="header in flatHeaders" 
+        :key="header.link" 
+        class="toc-item" 
+        :class="[`level-${header.level}`, { 'is-active': activeId === header.link.replace('#', '') }]"
+      >
+        <a :href="header.link" @click="handleLinkClick($event, header.link)">{{ header.title }}</a>
       </li>
     </ul>
   </aside>
@@ -102,15 +133,19 @@ onUnmounted(() => {
 
     <aside class="mobile-toc-drawer" :class="[{ 'is-open': isOpen }]">
       <div class="toc-header">
-        <div class="toc-title">目录</div>
+        <div class="toc-title"><span>//</span> 目录</div>
         <button class="close-btn" @click="closeDrawer">✕</button>
       </div>
       <ul class="toc-list">
-        <li v-for="header in flatHeaders" :key="header.link" class="toc-item" :class="[`level-${header.level}`]">
-          <a :href="header.link" @click="handleLinkClick">{{ header.title }}</a>
+        <li 
+          v-for="header in flatHeaders" 
+          :key="header.link" 
+          class="toc-item" 
+          :class="[`level-${header.level}`, { 'is-active': activeId === header.link.replace('#', '') }]"
+        >
+          <a :href="header.link" @click="handleLinkClick($event, header.link)">{{ header.title }}</a>
         </li>
       </ul>
-      <!-- 回到顶部按钮 -->
       <div class="back-to-top" @click="handleBackToTop">
         回到顶部
       </div>
@@ -119,154 +154,94 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* 基础样式 */
+/* ... 基础样式保持不变 ... */
 .toc-title {
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--ark-ink);
-  margin-bottom: 16px;
-  letter-spacing: 1px;
+  font-family: var(--ak-font-mono); font-weight: 700; font-size: 13px; color: var(--ark-ink);
+  margin-bottom: 16px; letter-spacing: 2px; display: flex; align-items: center; gap: 6px;
 }
-.toc-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.toc-item {
-  margin-bottom: 10px;
-  line-height: 1.5;
-}
-.toc-item a {
-  color: var(--ark-muted);
-  text-decoration: none;
-  font-size: 13px;
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: color 0.2s;
-}
-.toc-item a:hover {
-  color: var(--ark-accent);
-}
-.level-3 { padding-left: 14px; }
-.level-4 { padding-left: 28px; }
+.toc-title span { color: var(--ark-accent); opacity: 0.8; }
+.toc-list { list-style: none; padding: 0; margin: 0; }
+.toc-item { position: relative; margin-bottom: 8px; line-height: 1.5; }
 
-/* ================= 桌面端 ================= */
+.toc-item a {
+  font-family: var(--ark-font); color: var(--ark-muted); text-decoration: none; font-size: 13px;
+  display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  transition: all 0.3s ease; padding: 2px 0 4px 25px; position: relative;
+}
+
+.toc-item a::before {
+  content: ''; position: absolute; left: 4px; top: 50%; transform: translateY(-50%);
+  width: 4px; height: 1px; background-color: var(--ark-line); transition: all 0.3s ease;
+}
+
+.level-3 { padding-left: 36px; }
+.level-4 { padding-left: 52px; }
+.level-3 a::before { width: 10px; }
+.level-4 a::before { width: 16px; }
+
+/* 👇 核心新增：激活状态（雷达锁定）的样式 */
+.toc-item.is-active a {
+  color: var(--ark-ink); /* 文字变亮 */
+  font-weight: 600; /* 微微加粗 */
+}
+.toc-item.is-active a::before {
+  width: 14px; /* 线条拉长 */
+  background-color: var(--ark-accent); /* 亮起战术蓝 */
+}
+
+/* Hover 仅作为辅助反馈，如果在激活状态下 Hover，保持激活样式 */
+.toc-item a:hover {
+  color: var(--ark-ink);
+}
+.toc-item a:hover::before {
+  width: 16px; 
+  background-color: var(--ark-accent);
+}
+
+/* ... 桌面端、移动端原有代码保持不变 ... */
 .desktop-toc {
-  position: sticky;
-  top: 100px;
-  max-height: calc(100vh - 160px);
-  overflow-y: auto;
-  padding-left: 20px;
+  position: sticky; top: 100px; max-height: calc(100vh - 160px);
+  overflow-y: auto; padding-left: 20px; border-left: 1px dashed var(--ark-line);
 }
 .mobile-toc-wrapper { display: none; }
 
-/* ================= 移动端及窄屏 ================= */
 @media (max-width: 1024px) {
   .desktop-toc { display: none; }
   .mobile-toc-wrapper { display: block; }
-
   .mobile-toc-btn {
-    height: 44px;
-    width: 44px;
-    position: fixed;
-    top: 90px;
-    z-index: 100;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--ark-surface);
-    border: 1px solid var(--ark-line);
-    color: var(--ark-ink);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
+    height: 44px; width: 44px; position: fixed; top: 90px; z-index: 100; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--ark-surface); border: 1px solid var(--ark-line); color: var(--ark-ink);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); cursor: pointer;
   }
-
-  .toc-overlay {
-    position: fixed; inset: 0; background-color: transparent; z-index: 999;
-  }
-
-  /* 抽屉变为 flex 容器，自身不滚动 */
+  .toc-overlay { position: fixed; inset: 0; background-color: transparent; z-index: 999; }
   .mobile-toc-drawer {
-    position: fixed;
-    top: 0; right: 0; bottom: 0;
-    width: 260px;
-    background-color: var(--ark-paper);
-    z-index: 1000;
-    
-    padding: 0; /* 去掉内边距，交给子元素处理 */
-    display: flex;
-    flex-direction: column; /* 纵向排列：头 - 列表 - 底部 */
-    
-    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15); 
-    border-left: 1px solid var(--ark-line);
-    transform: translateX(100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    
-    overflow: hidden; /* 去掉整体滚动，交给列表去滚 */
-    overscroll-behavior: contain; 
+    position: fixed; top: 0; right: 0; bottom: 0; width: 280px; background-color: var(--ark-paper);
+    z-index: 1000; padding: 0; display: flex; flex-direction: column;
+    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15); border-left: 1px solid var(--ark-line);
+    transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden; overscroll-behavior: contain; 
   }
-
-  .mobile-toc-drawer.is-open {
-    transform: translateX(0);
-  }
-
-  /* 头部固定 */
+  .mobile-toc-drawer.is-open { transform: translateX(0); }
   .toc-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px 24px 16px; 
-    flex-shrink: 0; /* 防止被压缩 */
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 24px 16px; flex-shrink: 0; border-bottom: 1px solid var(--ark-line);
   }
-  
   .close-btn {
-    background: none;
-    border: none;
-    font-size: 18px;
-    color: var(--ark-muted);
-    cursor: pointer;
-    padding: 4px;
-    transition: color 0.2s;
+    background: none; border: none; font-size: 18px; color: var(--ark-muted);
+    cursor: pointer; padding: 4px; transition: color 0.2s;
   }
-  .close-btn:hover { color: var(--ark-ink); }
-
-  /* 中间列表独立滚动 */
-  .toc-list {
-    flex: 1; /* 占据剩余所有空间 */
-    overflow-y: auto; /* 只有列表内部可以滚动 */
-    padding: 0 24px; /* 给列表加上左右边距 */
-    overscroll-behavior: contain;
-  }
-
-  .toc-item { margin-bottom: 0; }
-  .toc-item a {
-    padding: 12px 0;
-    font-size: 15px;
-  }
-
-  /* 底部按钮固定 */
+  .toc-list { flex: 1; overflow-y: auto; padding: 16px 24px; overscroll-behavior: contain; }
+  .toc-item { margin-bottom: 12px; }
+  .toc-item a { font-size: 14px; }
   .back-to-top {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 16px 24px;
-    /* color: var(--ark-accent); */
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    border-top: 1px solid var(--ark-line);
-    background-color: var(--ark-paper);
-    flex-shrink: 0; /* 防止被压缩 */
-    transition: opacity 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 20px 24px; font-family: var(--ak-font-mono); letter-spacing: 2px;
+    color: var(--ark-muted); font-size: 13px; font-weight: 600; cursor: pointer;
+    border-top: 1px solid var(--ark-line); background-color: var(--ark-paper);
+    flex-shrink: 0; transition: background-color 0.2s;
   }
-  
-  .back-to-top:hover {
-    opacity: 0.8;
-  }
+  .back-to-top:hover { background-color: var(--ark-surface); }
 }
 
 @media (max-width: 1000px) { .mobile-toc-btn { right: 32px; } }
