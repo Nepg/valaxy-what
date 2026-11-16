@@ -1,5 +1,7 @@
 ---
 title: 制作 UE4 数值修改模组（HumanitZ）
+date: 2026-11-14
+updated: 2026-11-16
 ---
 
 <div class="ue4-mod-article">
