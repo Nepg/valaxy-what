@@ -143,7 +143,7 @@ html.dark .card-title {
   overflow: hidden;
 }
 
-/* 👇 核心改动 1：干掉那坨大白底，换成极淡的透明光晕 */
+/* 核心改动 1：干掉那坨大白底，换成极淡的透明光晕 */
 .resource-card:hover {
   transform: translateY(-2px); /* 悬浮时整个卡片微微上浮 */
 }
@@ -162,13 +162,13 @@ html.dark .card-title {
 }
 
 .resource-card:hover::after { 
-  opacity: 0.4; /* 👈 透明度调低，不要那么刺眼 */
+  opacity: 0.4; /* 透明度调低，不要那么刺眼 */
 }
 html.dark .resource-card:hover::after { 
-  opacity: 0.15; /* 👈 深色模式下只有极其微弱的背景辉光 */
+  opacity: 0.15; /* 色模式下只有极其微弱的背景辉光 */
 }
 
-/* 👇 核心改动 2：对焦框大升级，左下角和右上角呼应 */
+/* 核心改动 2：对焦框大升级，左下角和右上角呼应 */
 .resource-card::before {
   content: '';
   position: absolute;
@@ -229,11 +229,7 @@ html.dark .resource-card:hover::after {
   object-fit: contain;
   transition: all 0.3s ease;
 }
-html.dark .card-main img {
-  filter: saturate(0.95) opacity(0.95);
-}
-
-/* 👇 核心改动 3：操作面板的动画更有仪式感 */
+/* 核心改动 3：操作面板的动画 */
 .card-actions {
   position: absolute;
   inset: 0;
@@ -326,7 +322,7 @@ html.dark .card-main img {
   .resource-card a {
     text-decoration: none;
   }
-  /* 👇 1. 物理切断 Hover 干扰 */
+  /* 1. 物理切断 Hover 干扰 */
   .resource-card:hover {
     transform: none;
   }
@@ -383,11 +379,7 @@ html.dark .card-main img {
     flex-shrink: 0;
   }
   
-  html.dark .mobile-main-content img {
-    filter: saturate(0.75); 
-  }
-  
-  /* 👇 2. 注入 Ark 字体灵魂 */
+  /* 2. Ark 字体 */
   .card-title {
     font-family: var(--ark-display) ; /* 标题用粗衬线体 */
     font-size: 16px !important;
