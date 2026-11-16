@@ -52,10 +52,6 @@ const filteredCategories = computed(() => {
 
 <!-- 搜索框 UI -->
 <div class="ak-search-wrapper">
-  <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
-    <circle cx="10" cy="10" r="7"></circle>
-    <line x1="15" y1="15" x2="21" y2="21"></line>
-  </svg>
   <input 
     v-model="searchQuery" 
     type="text" 
