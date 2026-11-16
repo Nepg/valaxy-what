@@ -4,6 +4,10 @@ hideHeader: true
 ---
 
 <script setup>
+import { ref, computed } from 'vue'
+
+const searchQuery = ref('')
+
 const categories = [
   {
     title: "未分类",
@@ -25,19 +29,145 @@ const categories = [
     ]
   }
 ]
+
+// 核心：利用 computed 实时过滤数据
+const filteredCategories = computed(() => {
+  if (!searchQuery.value) return categories
+  
+  const query = searchQuery.value.toLowerCase()
+  
+  return categories.map(category => {
+    return {
+      ...category,
+      apps: category.apps.filter(app => 
+        app.name.toLowerCase().includes(query) || 
+        (app.desc && app.desc.toLowerCase().includes(query))
+      )
+    }
+  }).filter(category => category.apps.length > 0) // 如果该分类下没有匹配的App，直接隐藏该分类
+})
 </script>
 
+<!-- 搜索框 UI -->
+<div class="ak-search-wrapper">
+  <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
+    <circle cx="10" cy="10" r="7"></circle>
+    <line x1="15" y1="15" x2="21" y2="21"></line>
+  </svg>
+  <input 
+    v-model="searchQuery" 
+    type="text" 
+    class="ak-search-input" 
+    placeholder="[SEARCH_INPUT] / 查找软件、功能..." 
+  />
+  <div v-if="searchQuery" class="search-clear" @click="searchQuery = ''">✕</div>
+</div>
+
 <div class="category-list">
-  <div v-for="(category, index) in categories" :key="index" class="category-block">
+  <div v-for="(category, index) in filteredCategories" :key="index" class="category-block">
     <h2 :id="category.title">{{ category.title }}</h2>
     <div class="resource-grid">
       <ResourceCard v-for="app in category.apps" :key="app.name" v-bind="app" />
     </div>
   </div>
+  
+  <!-- 无结果时的空状态 -->
+  <div v-if="filteredCategories.length === 0" class="ak-empty-state">
+    <div class="empty-code">ERR_404 / NO_DATA</div>
+    <p>未在当前数据库中检索到匹配项。</p>
+  </div>
 </div>
 
 <style>
-/* 1. 就是你想要的自适应卡片网格 */
+/* --- 搜索框终端风格样式 --- */
+.ak-search-wrapper {
+  position: relative;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  background-color: var(--ark-surface);
+  border: 1px solid var(--ark-line);
+  border-radius: 4px; /* 方正的圆角 */
+  padding: 0 16px;
+  height: 48px;
+  transition: all 0.3s ease;
+}
+
+/* 焦点态：亮起蓝色边框和光晕 */
+.ak-search-wrapper:focus-within {
+  border-color: var(--ark-accent);
+  box-shadow: 0 0 0 1px var(--ark-accent);
+}
+
+/* 搜索图标 */
+.search-icon {
+  color: var(--ark-muted);
+  margin-right: 12px;
+  transition: color 0.3s ease;
+}
+.ak-search-wrapper:focus-within .search-icon {
+  color: var(--ark-accent);
+}
+/* 输入框本体：干掉所有浏览器默认样式 */
+.ak-search-input {
+  flex: 1;
+  width: 100%; /* 确保占满 */
+  background: transparent;
+  
+  /* 彻底干掉各种边框和轮廓 */
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-appearance: none; /* 干掉 iOS/Safari 的默认圆角和阴影 */
+  appearance: none;
+  
+  color: var(--ark-ink);
+  font-family: var(--ak-font-mono);
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+/* 针对聚焦状态二次确保 outline 被干掉 */
+.ak-search-input:focus,
+.ak-search-input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.ak-search-input::placeholder {
+  color: var(--ark-muted);
+  opacity: 0.6;
+}
+
+/* 清除按钮 */
+.search-clear {
+  color: var(--ark-muted);
+  cursor: pointer;
+  padding: 4px;
+  font-size: 12px;
+  transition: color 0.2s;
+}
+.search-clear:hover {
+  color: var(--ark-accent);
+}
+
+/* --- 空状态样式 --- */
+.ak-empty-state {
+  text-align: center;
+  padding: 60px 0;
+  color: var(--ark-muted);
+}
+.empty-code {
+  font-family: var(--ak-font-mono);
+  color: var(--ark-accent);
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+/* --- 分类与卡片网格（保留你之前的） --- */
 .resource-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -45,7 +175,6 @@ const categories = [
   margin-top: 20px;
 }
 
-/* 2. 覆盖分类标题的默认样式（去掉了 scoped，直接作用于全局） */
 h2 {
   border-top: none !important;
   padding-top: 0 !important;
@@ -53,22 +182,20 @@ h2 {
   margin-bottom: 12px !important;
 }
 
-/* 第一个分类不需要顶部间距 */
 .category-block:first-child h2 {
   margin-top: 0 !important;
 }
+
 .category-block h2 {
   border-top: none;
   padding-top: 0;
   margin-top: 40px;
   margin-bottom: 12px ;
-  
-  /* 新增字体样式 */
   font-family: var(--ark-font) !important;
   font-weight: 700 ; 
   font-size: 22px ;
 }
-/* 3. 移动端微调 */
+
 @media (max-width: 768px) {
   h2 {
     margin-top: 30px !important;
