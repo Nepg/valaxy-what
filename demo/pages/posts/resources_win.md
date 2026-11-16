@@ -138,10 +138,6 @@ const filteredCategories = computed(() => {
 
 <!-- 搜索框 UI -->
 <div class="ak-search-wrapper">
-  <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square">
-    <circle cx="10" cy="10" r="7"></circle>
-    <line x1="15" y1="15" x2="21" y2="21"></line>
-  </svg>
   <input 
     v-model="searchQuery" 
     type="text" 
@@ -168,34 +164,51 @@ const filteredCategories = computed(() => {
 
 <style>
 /* --- 搜索框终端风格样式 --- */
+
 .ak-search-wrapper {
   position: relative;
   margin-top: 30px;
   margin-bottom: 40px;
   display: flex;
   align-items: center;
-  background-color: var(--ark-surface);
-  border: 1px solid var(--ark-line);
-  border-radius: 4px; /* 方正的圆角 */
+  border: none;
+  border-radius: 0;
+  
+  /* 默认的底色 */
+  background-color: var(--ark-surface); 
   padding: 0 16px;
   height: 48px;
+  
+  /* 这里的 transition 加上 box-shadow，让线条亮起更顺滑 */
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 👇 核心修改：聚焦时的处理 */
+.ak-search-wrapper:focus-within {
+  /* 背景颜色不变，维持面板的实体感，微微提升一点点亮度（可选） */
+  /* background-color: var(--ark-surface); */ 
+  
+  /* 底部亮起 1px 的蓝色扫描线 */
+  box-shadow: 0 1px 0 0 var(--ark-accent); 
+}
+
+/* 左侧终端提示符 */
+.ak-search-wrapper::before {
+  content: '>_';
+  font-family: var(--ak-font-mono);
+  color: var(--ark-muted);
+  margin-right: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0px;
+  opacity: 0.6;
   transition: all 0.3s ease;
 }
 
-/* 焦点态：亮起蓝色边框和光晕 */
-.ak-search-wrapper:focus-within {
-  border-color: var(--ark-accent);
-  box-shadow: 0 0 0 1px var(--ark-accent);
-}
-
-/* 搜索图标 */
-.search-icon {
-  color: var(--ark-muted);
-  margin-right: 12px;
-  transition: color 0.3s ease;
-}
-.ak-search-wrapper:focus-within .search-icon {
+/* 聚焦时，提示符变成战术蓝，并且闪烁/高亮 */
+.ak-search-wrapper:focus-within::before {
   color: var(--ark-accent);
+  opacity: 1;
 }
 
 /* 输入框本体：干掉所有浏览器默认样式 */
