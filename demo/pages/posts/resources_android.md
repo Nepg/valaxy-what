@@ -76,7 +76,7 @@ const filteredCategories = computed(() => {
   <!-- 无结果时的空状态 -->
   <div v-if="filteredCategories.length === 0" class="ak-empty-state">
     <div class="empty-code">ERR_404 / NO_DATA</div>
-    <p>未在当前数据库中检索到匹配项。</p>
+    <p>未检索到匹配项。</p>
   </div>
 </div>
 

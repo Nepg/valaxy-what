@@ -19,9 +19,9 @@
 
 html.dark {
   --ark-accent: #4cc3ffe0;
-  --ark-paper: #151a1e;
+  --ark-paper: #1a1e23; 
   --ark-surface: #1b2227;
-  --ark-ink: #e7ebea;
+  --ark-ink: #e8ecef; 
   --ark-muted: #a8b3ba;
   --ark-line: #36424a;
   --ark-link: #83d2e8;
@@ -32,6 +32,20 @@ html {
   scroll-padding-top: 2rem;
   scrollbar-gutter: stable;
 }
+/* 针对大标题消肿：减字重、去发光 */
+html.dark .ark-article-header h1,
+html.dark .card-title {
+  font-weight: 600; /* 浅色如果是 700/900，深色降到 600 */
+  text-shadow: none !important; /* 干掉那个导致发胖的文字阴影 */
+}
+
+/* 针对卡片正文消肿 */
+html.dark .card-desc,
+html.dark .toc-item a {
+  font-weight: 300; /* 深色下用细体更高级 */
+  letter-spacing: 0.5px; /* 稍微拉开一点字距，增加呼吸感 */
+}
+
 body {
   margin: 0;
   background: var(--ark-paper);
@@ -535,6 +549,13 @@ body {
   margin: 0 0 24px;
   letter-spacing: -0.02em;
   overflow-wrap: anywhere;
+}
+
+html.dark .ark-article-header h1 {
+  /* 把发光效果改得极其微弱，或者干脆去掉文字阴影 */
+  text-shadow: none; 
+  /* 稍微降低一点字重 */
+  font-weight: 600; 
 }
 .ark-article-description {
   color: var(--ak-text-secondary);

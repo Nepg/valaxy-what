@@ -47,7 +47,7 @@ const categories = [
   {
     title: "桌面、效率",
     apps: [
-      { icon: "/icons/nanazip.ico", name: "NanaZip", desc: "", website: "https://nanazip.org/", pan: "https://share.feijipan.com/s/xExo1FtC" },
+      { icon: "/icons/nanazip.ico", name: "NanaZip", desc: "解压缩", website: "https://nanazip.org/", pan: "https://share.feijipan.com/s/xExo1FtC" },
       { icon: "/icons/hibituninstaller.png", name: "HiBit Uninstaller", desc: "卸载工具", website: "https://hibitsoft.ir/Uninstaller.html", pan: "https://wwanv.lanzoum.com/i8FX73ysrv3c" },
       { icon: "/icons/KeePassXC.svg", name: "KeePassXC", desc: "密码管理", website: "https://github.com/keepassxreboot/keepassxc", pan: "https://wwanv.lanzoum.com/izCoD3xuh98b" },
       { icon: "/icons/Everything.ico", name: "Everything", desc: "", website: "https://www.voidtools.com/", pan: "https://wwanv.lanzoum.com/iS6mK3x807pc" },
@@ -162,7 +162,7 @@ const filteredCategories = computed(() => {
   <!-- 无结果时的空状态 -->
   <div v-if="filteredCategories.length === 0" class="ak-empty-state">
     <div class="empty-code">ERR_404 / NO_DATA</div>
-    <p>未在当前数据库中检索到匹配项。</p>
+    <p>未检索到匹配项。</p>
   </div>
 </div>
 
