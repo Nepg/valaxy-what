@@ -166,7 +166,7 @@ onUnmounted(() => {
 
 .toc-item a {
   font-family: var(--ark-font); color: var(--ark-muted); text-decoration: none; font-size: 13px;
-  display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  display: block;   white-space: normal;word-break: break-all; line-height: 1.5;
   transition: all 0.3s ease; padding: 2px 0 4px 25px; position: relative;
 }
 
@@ -236,7 +236,7 @@ onUnmounted(() => {
     position: fixed; top: 0; right: 0; bottom: 0; width: 280px; background-color: var(--ark-paper);
     z-index: 1000; padding: 0; display: flex; flex-direction: column;
     box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15); border-left: 1px solid var(--ark-line);
-    transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(100%); transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden; overscroll-behavior: contain; 
   }
   .mobile-toc-drawer.is-open { transform: translateX(0); }

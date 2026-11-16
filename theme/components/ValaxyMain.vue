@@ -57,10 +57,16 @@ const outlineEnabled = computed(() => (props.frontmatter.outline ?? theme.value.
 /* 桌面端：极宽的自适应网格 */
 .my-custom-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 120px;
-  gap: 60px;
+  grid-template-columns: minmax(0, 1fr) 200px;
+  gap: 50px;
   max-width: 1400px;
   margin: 0 auto;
+}
+/* 屏幕不够大时，自动收缩保护 */
+@media (max-width: 1400px) {
+  .my-custom-layout {
+    max-width: 100%; /* 让左右两边贴边，或者改成 95% */
+  }
 }
 
 /* 移动端：改为单列，绝不隐藏 FloatingToc */
