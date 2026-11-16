@@ -31,6 +31,7 @@ html.dark {
 html {
   scroll-padding-top: 2rem;
   scrollbar-gutter: stable;
+  min-height: 100vh;
 }
 /* 针对大标题消肿：减字重、去发光 */
 html.dark .ark-article-header h1,
@@ -52,6 +53,7 @@ body {
   color: var(--ark-ink);
   font-family: var(--ark-font);
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
 }
 .ark-shell,
 .ark-shell *,
