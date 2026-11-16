@@ -164,7 +164,6 @@ const filteredCategories = computed(() => {
 
 <style>
 /* --- 搜索框终端风格样式 --- */
-
 .ak-search-wrapper {
   position: relative;
   margin-top: 30px;
@@ -183,7 +182,7 @@ const filteredCategories = computed(() => {
   transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* 👇 核心修改：聚焦时的处理 */
+/* 聚焦时的处理 */
 .ak-search-wrapper:focus-within {
   /* 背景颜色不变，维持面板的实体感，微微提升一点点亮度（可选） */
   /* background-color: var(--ark-surface); */ 
