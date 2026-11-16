@@ -45,4 +45,9 @@ const text = useArknightsText()
   z-index: 1; /* 确保在最上层，可以接收鼠标点击 */
 }
 
+/* 3. 箭头颜色*/
+.ark-post-row:hover .ark-post-arrow {
+  color: var(--ark-accent);
+}
+
 </style>
