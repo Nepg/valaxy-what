@@ -50,13 +50,13 @@ const outlineEnabled = computed(() => (props.frontmatter.outline ?? theme.value.
     </slot>
     <!-- 时间戳面板 -->
     <div v-if="frontmatter.date" class="ark-post-timestamps">
-      <p v-if="frontmatter.updated" class="ark-eyebrow">
-        {{ text.updated }} / {{ postDate(frontmatter.updated) }}
-      </p>
+
       <p class="ark-eyebrow">
         {{ text.published }} / {{ postDate(frontmatter.date) }}
       </p>
-
+      <p v-if="frontmatter.updated" class="ark-eyebrow">
+        {{ text.updated }} / {{ postDate(frontmatter.updated) }}
+      </p>
     </div>
   </main>
 </template>
@@ -69,6 +69,36 @@ const outlineEnabled = computed(() => (props.frontmatter.outline ?? theme.value.
   gap: 50px;
   max-width: 1400px;
   margin: 0 auto;
+}
+
+.ark-post-timestamps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 60px; /* 距离正文远一点 */
+  padding-top: 16px;
+  border-top: 1px dashed var(--ark-line); /* 极细的虚线切割 */
+  
+  /* 使用等宽字体，强化数据感 */
+  font-family: var(--ak-font-mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--ark-muted);
+  opacity: 0.8;
+}
+
+/* 消除 p 标签默认的 margin */
+.ark-post-timestamps p {
+  margin: 0;
+}
+
+/* 给时间戳的标签前缀加一点战术蓝 */
+.ark-post-timestamps .ark-eyebrow::before {
+  content: '>';
+  color: var(--ark-accent);
+  margin-right: 4px;
+  font-weight: 700;
 }
 /* 屏幕不够大时，自动收缩保护 */
 @media (max-width: 1400px) {
