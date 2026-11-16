@@ -16,7 +16,8 @@ const outlineEnabled = computed(() => (props.frontmatter.outline ?? theme.value.
 <template>
   <main id="ark-main" class="ark-reading" tabindex="-1">
     <slot name="main">
-      <header class="ark-article-header">
+      <!-- 如果 hideHeader 为 true，则隐藏整个头部 -->
+      <header v-if="!frontmatter.hideHeader" class="ark-article-header">
         <!-- <RouterLink to="/archives/" class="ark-back">
           ← {{ text.back }}
         </RouterLink> -->

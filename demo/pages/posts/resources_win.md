@@ -1,5 +1,6 @@
 ---
 title: windows资源整理
+hideHeader: true
 ---
 
 <script setup>
@@ -31,7 +32,7 @@ const categories = [
       { icon: "/icons/fdm.ico", name: "FDM", desc: "", website: "https://www.freedownloadmanager.org/", pan: "https://wwanv.lanzoum.com/i40HS48mj1di" },
       { icon: "/icons/xunlei.png", name: "迅雷", desc: "", website: "https://dl.xunlei.com/", pan: "https://wwanv.lanzoum.com/iOo1S3x7kt4h" },
       { icon: "/icons/LocalSend.png", name: "LocalSend", desc: "局域网传文件", website: "https://localsend.org/zh-TW/download", pan: "https://wwanv.lanzoum.com/iIl6o48qvu7c" },
-      { icon: "/icons/radminvpn.png", name: "Radmin VPN", desc: "远程", website: "https://www.radmin-lan.cn/", pan: "https://share.feijipan.com/s/trxocp88" },
+      { icon: "/icons/radminvpn.png", name: "Radmin VPN", desc: "组网", website: "https://www.radmin-lan.cn/", pan: "https://share.feijipan.com/s/trxocp88" },
       { icon: "/icons/natpierce.ico", name: "皎月连", desc: "p2p内网穿透", website: "https://www.natpierce.cn/" },
       { icon: "/icons/SubnetDesk.ico", name: "SubnetDesk", desc: "搭配p2p实现远程桌面", website: "https://github.com/zibo-chen/SubnetDesk", pan: "https://wwanv.lanzouc.com/iDHGL4a2n2jg" },
       { icon: "/icons/uuyc.ico", name: "网易UU远程", desc: "远程", website: "https://uuyc.163.com/" }
@@ -142,6 +143,18 @@ h2 {
 /* 第一个分类不需要顶部间距 */
 .category-block:first-child h2 {
   margin-top: 0 !important;
+}
+
+.category-block h2 {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 40px;
+  margin-bottom: 12px ;
+  
+  /* 新增字体样式 */
+  font-family: var(--ark-font) !important;
+  font-weight: 700 ; 
+  font-size: 22px ;
 }
 
 /* 3. 移动端微调 */

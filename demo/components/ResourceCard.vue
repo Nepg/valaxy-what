@@ -88,7 +88,7 @@ defineProps({
 </template>
 
 <style scoped>
-/* 定义入场动画 */
+
 @keyframes akEnter {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -100,6 +100,7 @@ defineProps({
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* 增加位移过渡 */
 }
 .card-title {
   font-family: var(--ark-display); 
@@ -128,83 +129,61 @@ html.dark .card-title {
 }
 
 /* =========================================
-   桌面端卡片样式
-   ========================================= */
-/* =========================================
    卡片本体
    ========================================= */
 .resource-card {
-  animation: akEnter 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: akEnter 0.4s cubic-bezier(0.25, 1, 0.5, 1) both;
   position: relative;
   height: 90px;
   border: none;
   background-color: transparent; 
-  transition: transform 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   overflow: hidden;
 }
 
-/* 核心改动 1：干掉那坨大白底，换成极淡的透明光晕 */
 .resource-card:hover {
-  transform: translateY(-2px); /* 悬浮时整个卡片微微上浮 */
+  transform: translateY(-2px); 
 }
 
+/* 极其克制的背景光晕 */
 .resource-card::after {
   content: '';
   position: absolute;
   inset: 0;
-  /* 用半透明背景色代替纯色，浅色下是极淡的灰，深色下是极淡的光 */
   background-color: var(--ark-surface); 
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
   z-index: 0;
-  /* 圆角稍微收一点，感觉更硬朗 */
   border-radius: 4px;
 }
-
 .resource-card:hover::after { 
-  opacity: 0.4; /* 透明度调低，不要那么刺眼 */
+  opacity: 0.4; 
 }
 html.dark .resource-card:hover::after { 
-  opacity: 0.15; /* 色模式下只有极其微弱的背景辉光 */
+  opacity: 0.15; 
 }
 
-/* 核心改动 2：对焦框大升级，左下角和右上角呼应 */
+/* 修复 Bug：将左上角标绑定在最外层 */
 .resource-card::before {
   content: '';
   position: absolute;
-  top: 8px;
-  left: 8px;
-  width: 10px;
-  height: 10px;
-  border-top: 1px solid var(--ark-accent);
-  border-left: 1px solid var(--ark-accent);
+  top: 12px;
+  left: 12px;
+  width: 8px;
+  height: 8px;
+  border-top: 1.5px solid var(--ark-accent);
+  border-left: 1.5px solid var(--ark-accent);
   opacity: 0;
-  transform: translate(-2px, -2px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 2;
-  pointer-events: none;
-}
-/* 用伪元素再画一个右下角的角标 */
-.card-main::after {
-  content: '';
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  width: 10px;
-  height: 10px;
-  border-bottom: 1px solid var(--ark-accent);
-  border-right: 1px solid var(--ark-accent);
-  opacity: 0;
-  transform: translate(2px, 2px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 2;
+  transform: translate(4px, 4px) scale(0.8);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* 带一点弹性的曲线 */
+  z-index: 3;
   pointer-events: none;
 }
 
-.resource-card:hover::before,
-.resource-card:hover .card-main::after {
-  opacity: 0.7; /* 不要全亮，留点克制 */
-  transform: translate(0, 0);
+
+.resource-card:hover::before{
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
 }
 
 .desktop-view {
@@ -220,33 +199,39 @@ html.dark .resource-card:hover::after {
   display: flex;
   align-items: center;
   padding: 0 20px;
-  transition: opacity 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .card-main img {
   width: 44px;
   height: 44px;
   margin-right: 16px;
   object-fit: contain;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
-/* 核心改动 3：操作面板的动画 */
+
+/* 新增：Hover 时主内容向左微移、渐隐，图标微缩 */
+.resource-card:hover .card-main {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-10px); 
+}
+.resource-card:hover .card-main img {
+  transform: scale(0.9);
+}
+
+/* 核心改动：操作面板的动画 */
 .card-actions {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: stretch;
   justify-content: center;
-  background-color: transparent;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 2;
 }
 
-.resource-card:hover .card-main {
-  opacity: 0;
-  pointer-events: none;
-}
 .resource-card:hover .card-actions {
   opacity: 1;
   pointer-events: auto;
@@ -257,34 +242,34 @@ html.dark .resource-card:hover::after {
   font-family: var(--ark-font); 
   flex: 1;
   display: flex;
-  flex-direction: row; 
+  flex-direction: row; /* 👈 改回横向排列 */
   align-items: center;
   justify-content: center; 
-  gap: 8px;
+  gap: 8px; /* 👈 文字和数字之间留一点间距 */
   height: 100%;
   text-decoration: none !important;
   color: var(--ark-muted) !important;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 1px;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   position: relative;
-  
-  /* 文字默认往下偏移一点点，悬浮时上浮 */
-  transform: translateY(5px);
+  transform: translateY(15px);
 }
 .resource-card:hover .action-btn {
   transform: translateY(0);
 }
 
+/* 按钮分割线 */
 .action-btn + .action-btn::before {
   content: '';
   position: absolute;
   left: 0;
-  top: 30%;
-  bottom: 30%;
+  top: 40%;
+  bottom: 40%;
   width: 1px;
   background-color: var(--ark-line);
+  transition: all 0.3s ease;
 }
 
 .action-btn:hover {
@@ -292,18 +277,26 @@ html.dark .resource-card:hover::after {
   color: var(--ark-accent) !important; 
 }
 
+/* 细节：Hover 按钮时，分割线向两端拉长 */
+.action-btn:hover + .action-btn::before,
+.action-btn:hover::before {
+  top: 20%;
+  bottom: 20%;
+}
+
+/* 序号排版优化 */
 .action-btn .btn-index {
   font-family: var(--ak-font-mono); 
-  font-size: 10px;
+  font-size: 10px; /* 稍微改大一丁点，更有质感 */
   color: var(--ak-text-secondary);
-  opacity: 0.5;
-  margin-left: 4px;
+  opacity: 0.4;
   transition: all 0.3s ease;
 }
 
 .action-btn:hover .btn-index {
   color: var(--ark-accent);
   opacity: 1;
+  transform: translateY(0);
 }
 
 /* =========================================

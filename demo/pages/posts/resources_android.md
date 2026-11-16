@@ -1,5 +1,6 @@
 ---
 title: 安卓资源整理
+hideHeader: true
 ---
 
 <script setup>
@@ -56,7 +57,17 @@ h2 {
 .category-block:first-child h2 {
   margin-top: 0 !important;
 }
-
+.category-block h2 {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 40px;
+  margin-bottom: 12px ;
+  
+  /* 新增字体样式 */
+  font-family: var(--ark-font) !important;
+  font-weight: 700 ; 
+  font-size: 22px ;
+}
 /* 3. 移动端微调 */
 @media (max-width: 768px) {
   h2 {
