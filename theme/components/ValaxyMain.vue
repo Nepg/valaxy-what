@@ -51,10 +51,10 @@ const outlineEnabled = computed(() => (props.frontmatter.outline ?? theme.value.
     <!-- 时间戳面板 -->
     <div v-if="frontmatter.date" class="ark-post-timestamps">
       <p class="ark-eyebrow">
-        {{ text.published }} / {{ postDate(frontmatter.date) }}
+        {{ text.published }} {{ postDate(frontmatter.date) }}
       </p>
       <p v-if="frontmatter.updated" class="ark-eyebrow">
-        {{ text.updated }} / {{ postDate(frontmatter.updated) }}
+        {{ text.updated }} {{ postDate(frontmatter.updated) }}
       </p>
     </div>
   </main>

@@ -250,7 +250,7 @@ html.dark .resource-card:hover::after {
   text-decoration: none !important;
   color: var(--ark-muted) !important;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 1px;
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   position: relative;

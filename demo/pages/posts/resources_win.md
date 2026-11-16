@@ -291,13 +291,32 @@ h2 {
 }
 
 .category-block h2 {
-  border-top: none;
-  padding-top: 0;
-  margin-top: 40px;
-  margin-bottom: 12px ;
+  /* 清除原本的主题默认边框和间距 */
+  border-top: none !important;
+  border-bottom: none !important;
+  padding-top: 0 !important;
+  margin-top: 40px !important;
+  margin-bottom: 20px !important; /* 稍微加大底距 */
+  
   font-family: var(--ark-font) !important;
-  font-weight: 700 ; 
-  font-size: 22px ;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--ark-ink);
+
+  /* 👇 核心魔法：变成 Flex 容器 */
+  display: flex;
+  align-items: center;
+}
+
+/* 利用伪元素生成右侧的延伸线 */
+.category-block h2::after {
+  content: '';
+  flex: 1; /* 自动填满剩下的所有宽度 */
+  height: 1px;
+  background-color: var(--ark-line);
+  margin-left: 16px; /* 和文字拉开距离 */
+  
+  /* 如果你喜欢虚线，可以换成 border-top: 1px dashed var(--ark-line); */
 }
 
 @media (max-width: 768px) {
