@@ -127,7 +127,7 @@ onUnmounted(() => {
 
   <div class="mobile-toc-wrapper">
     <button class="mobile-toc-btn" @click="openDrawer">
-     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter"><path d="M4 6h16M8 12h12M12 18h8"></path></svg>
+     <svg class="ak-icon ak-icon--stroke" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter"><path d="M4 6h16M8 12h12M12 18h8"></path></svg>
     </button>
 
     <div v-if="isOpen" class="toc-overlay" @click="closeDrawer" />

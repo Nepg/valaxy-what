@@ -303,7 +303,7 @@ h2 {
   font-size: 22px;
   color: var(--ark-ink);
 
-  /* 👇 核心魔法：变成 Flex 容器 */
+  /* 变成 Flex 容器 */
   display: flex;
   align-items: center;
 }

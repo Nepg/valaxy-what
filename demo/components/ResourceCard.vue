@@ -145,7 +145,7 @@ html.dark .card-title {
   transform: translateY(-2px); 
 }
 
-/* 极其克制的背景光晕 */
+/* 背景光晕 */
 .resource-card::after {
   content: '';
   position: absolute;
@@ -163,7 +163,7 @@ html.dark .resource-card:hover::after {
   opacity: 0.15; 
 }
 
-/* 修复 Bug：将左上角标绑定在最外层 */
+/* 将左上角标绑定在最外层 */
 .resource-card::before {
   content: '';
   position: absolute;
@@ -175,7 +175,7 @@ html.dark .resource-card:hover::after {
   border-left: 1.5px solid var(--ark-accent);
   opacity: 0;
   transform: translate(4px, 4px) scale(0.8);
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* 带一点弹性的曲线 */
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   z-index: 3;
   pointer-events: none;
 }
@@ -228,7 +228,7 @@ html.dark .resource-card:hover::after {
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 2;
 }
 
@@ -242,19 +242,19 @@ html.dark .resource-card:hover::after {
   font-family: var(--ark-font); 
   flex: 1;
   display: flex;
-  flex-direction: row; /* 👈 改回横向排列 */
+  flex-direction: row; /* 改回横向排列 */
   align-items: center;
   justify-content: center; 
-  gap: 8px; /* 👈 文字和数字之间留一点间距 */
+  gap: 8px; /* 文字和数字之间留一点间距 */
   height: 100%;
   text-decoration: none !important;
   color: var(--ark-muted) !important;
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 1px;
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
   position: relative;
-  transform: translateY(15px);
+  transform: translateY(16px);
 }
 .resource-card:hover .action-btn {
   transform: translateY(0);
