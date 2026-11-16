@@ -316,22 +316,40 @@ html.dark .card-main img {
 .mobile-view {
   display: none;
 }
-
+/* =========================================
+   移动端：保留当前结构，注入 Ark 灵魂
+   ========================================= */
 @media (max-width: 768px) {
-  .desktop-view { display: none; }
-  .app-logo { margin-left: 0; }
+  .desktop-view {
+    display: none;
+  }
+  .resource-card a {
+    text-decoration: none;
+  }
+  /* 👇 1. 物理切断 Hover 干扰 */
+  .resource-card:hover {
+    transform: none;
+  }
+  .resource-card:hover::before, 
+  .resource-card:hover::after {
+    opacity: 0;
+  }
+  .resource-card:hover .card-main {
+    opacity: 1; /* 强制保持主内容可见 */
+    pointer-events: auto;
+  }
+  .resource-card:hover .card-actions {
+    display: none; /* 彻底关闭悬浮面板在移动端的触发 */
+  }
 
   .resource-card {
-    animation: none; /* 移动端不需要入场动画，滑动即可 */
-    height: 68px;
+    height: 76px; /* 稍微加高一点 */
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid var(--ark-line);
+    border-bottom: 1px solid var(--ark-line); /* 保持底部分割线 */
     border-radius: 0;
+    animation: none; /* 移动端不需要入场动画 */
   }
-  
-  .resource-card::before,
-  .resource-card::after { display: none; }
 
   .mobile-view {
     display: flex;
@@ -348,41 +366,45 @@ html.dark .card-main img {
     flex: 1;
     height: 100%;
     overflow: hidden;
-    text-decoration: none !important;
-    color: inherit !important;
-    padding-left: 4px;
+    padding-left: 8px; 
   }
 
   .mobile-main-content {
     display: flex;
     align-items: center;
     overflow: hidden;
+    gap: 12px;
   }
 
   .mobile-main-content img {
     width: 36px;
     height: 36px;
-    margin-right: 12px;
     object-fit: contain;
     flex-shrink: 0;
   }
   
-  /* 👇 修复了 0. 的笔误，改为 0.75 */
   html.dark .mobile-main-content img {
     filter: saturate(0.75); 
   }
   
-  .title-short { font-size: 15px !important; }
-  .title-medium { font-size: 14px !important; }
-  .title-long { font-size: 13px !important; }
-
+  /* 👇 2. 注入 Ark 字体灵魂 */
   .card-title {
-    font-size: 15px;
-    letter-spacing: 0;
+    font-family: var(--ark-display) ; /* 标题用粗衬线体 */
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
   }
+  html.dark .card-title {
+    text-shadow: 0 0 1px var(--ak-text-primary);
+  }
+
   .card-desc {
-    font-size: 12px;
+    font-family: var(--ak-font-mono); /* 描述用等宽字体，极客感 */
+    font-size: 11px !important;
+    letter-spacing: 0px;
     color: var(--ark-muted);
+    opacity: 0.8;
   }
 
   .mobile-hints {
@@ -393,26 +415,26 @@ html.dark .card-main img {
   }
 
   .hint-text {
+    font-family: var(--ark-font) !important; /* 提示文字用无衬线 */
     color: var(--ark-muted) !important;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     display: flex;
     align-items: center;
     height: 100%;
     padding: 0 16px;
-    box-sizing: border-box;
-    letter-spacing: 1px;
   }
 
+  /* 独立网盘按钮 */
   .mobile-pan-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: transparent;
     color: var(--ark-accent) !important;
+    font-family: var(--ark-font) !important;
     font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 1px;
+    font-size: 13px;
     height: 100% !important;
     padding: 0 16px;
     text-decoration: none !important;
@@ -420,12 +442,13 @@ html.dark .card-main img {
     position: relative;
   }
   
+  /* 竖线分割保留，但高度缩短，更有呼吸感 */
   .mobile-pan-btn::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 30%;
-    bottom: 30%;
+    top: 35%;
+    bottom: 35%;
     width: 1px;
     background-color: var(--ark-line);
   }
