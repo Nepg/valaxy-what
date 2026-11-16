@@ -136,9 +136,16 @@ const filteredCategories = computed(() => {
   border: none !important;
 }
 
+/* 输入框默认的占位文字样式 */
 .ak-search-input::placeholder {
   color: var(--ark-muted);
   opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+/* 当输入框被点击/激活时，让提示文字瞬间消失 */
+.ak-search-input:focus::placeholder {
+  opacity: 0;
 }
 
 /* 清除按钮 */
