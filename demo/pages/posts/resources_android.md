@@ -52,6 +52,7 @@ const filteredCategories = computed(() => {
 
 <!-- 搜索框 UI -->
 <div class="ak-search-wrapper">
+  <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
   <input 
     v-model="searchQuery" 
     type="text" 
@@ -104,24 +105,18 @@ const filteredCategories = computed(() => {
   /* 底部亮起 1px 的蓝色扫描线 */
   box-shadow: 0 1px 0 0 var(--ark-accent); 
 }
-
-/* 左侧终端提示符 */
-.ak-search-wrapper::before {
-  content: '>_';
-  font-family: var(--ak-font-mono);
+.search-icon {
   color: var(--ark-muted);
-  margin-right: 16px;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0px;
-  opacity: 0.6;
-  transition: all 0.3s ease;
+  margin-right: 18px; 
+  opacity: 0.8;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* 聚焦时，提示符变成战术蓝，并且闪烁/高亮 */
-.ak-search-wrapper:focus-within::before {
+/* 聚焦时，放大镜变蓝并轻微放大 */
+.ak-search-wrapper:focus-within .search-icon {
   color: var(--ark-accent);
   opacity: 1;
+  transform: scale(1.1); /* 微微放大一点点，像被激活了 */
 }
 
 /* 输入框本体：干掉所有浏览器默认样式 */
