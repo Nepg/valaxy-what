@@ -30,6 +30,7 @@ html.dark {
 
 html {
   scroll-padding-top: 2rem;
+  scrollbar-gutter: stable;
 }
 body {
   margin: 0;
