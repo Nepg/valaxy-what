@@ -22,21 +22,33 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      
       - uses: pnpm/action-setup@v4
+      
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
-      - run: pnpm install --frozen-lockfile
+          
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 初始化 Pages 环境
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
       - name: Build
         working-directory: ./demo
         run: pnpm build
         env:
           VITE_BASE: /valaxy-what/
           SITE_URL: https://Nepg.github.io/valaxy-what/
-      #  v4 改成 v3
-      - uses: actions/upload-pages-artifact@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: demo/dist
-      - id: deployment
+
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
