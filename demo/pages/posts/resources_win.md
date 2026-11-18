@@ -1,7 +1,7 @@
 ---
 title: windows资源整理
 date: 2026-11-14
-updated: 2026-11-16
+updated: 2026-11-18
 hideHeader: true
 ---
 
@@ -84,15 +84,15 @@ const categories = [
   {
     title: "媒体、日常",
     apps: [
-      { icon: "/icons/mpv.ico", name: "mpv-lazy", desc: "补帧懒人包，hooke007 维护，安装即用", keywords:["视频播放器"], website: "https://github.com/hooke007/mpv_PlayKit", pan: "https://cloud.189.cn/web/share?code=B3MNBvVzueAb（访问码：bb8g）" },
-      { icon: "/icons/potplayer.png", name: "Potplayer", desc: "", keywords:["视频播放器"], website: "https://potplayer.tv/", pan: "https://wwi.lanzoui.com/xxxx" },
-      { icon: "/icons/MusicPlayer2.png", name: "MusicPlayer2", desc: "众里寻他千百度",keywords:["本地音乐播放器"],  website: "https://github.com/zhongyang219/MusicPlayer2", pan: "https://share.feijipan.com/s/lEzFwpBC"  },
+      { icon: "/icons/mpv.ico", name: "mpv-lazy", desc: "补帧懒人包，hooke007 维护，安装即用", keywords:["视频播放器","video","mp4"], website: "https://github.com/hooke007/mpv_PlayKit", pan: "https://cloud.189.cn/web/share?code=B3MNBvVzueAb（访问码：bb8g）" },
+      { icon: "/icons/potplayer.png", name: "Potplayer", desc: "", keywords:["视频播放器","video","mp4"], website: "https://potplayer.tv/", pan: "https://wwi.lanzoui.com/xxxx" },
+      { icon: "/icons/MusicPlayer2.png", name: "MusicPlayer2", desc: "众里寻他千百度",keywords:["本地音乐播放器","mp3","flac"],  website: "https://github.com/zhongyang219/MusicPlayer2", pan: "https://share.feijipan.com/s/lEzFwpBC"  },
       { icon: "/icons/chrome.svg", name: "Chrome", desc: "", keywords:["谷歌浏览器","Chromium 内核"], website: "https://www.google.cn/chrome/", pan: "https://cloud.189.cn/web/share?code=3QVbQjBzmu2q（访问码：5krq）" },
       { icon: "/icons/helium.png", name: "Helium", desc: "", keywords:["浏览器","Chromium 内核"],website: "https://github.com/imputnet/helium", pan: "https://share.feijipan.com/s/buzGTxRA" },
-      { icon: "/icons/PDFgear.png", name: "PDFgear", desc: "PDF编辑器", website: "https://www.pdfgear.com/zh/" },
-      { icon: "/icons/wps.png", name: "WPS", desc: "", keywords:["word","excel","pdf","ppt","文档","表格","演示"], website: "https://www.wps.cn/", pan: "https://share.feijipan.com/s/fizTfgK1"  },
+      { icon: "/icons/PDFgear.png", name: "PDFgear", desc: "PDF编辑器", keywords:["办公"], website: "https://www.pdfgear.com/zh/" },
+      { icon: "/icons/wps.png", name: "WPS", desc: "", keywords:["办公","word","excel","pdf","ppt","文档","表格","演示"], website: "https://www.wps.cn/", pan: "https://share.feijipan.com/s/fizTfgK1"  },
       { icon: "/icons/qq.ico", name: "QQ", desc: "", website: "https://im.qq.com/download" },
-      { icon: "/icons/weChat.png", name: "微信", desc: "", website: "https://weixin.qq.com/" }
+      { icon: "/icons/weChat.png", name: "微信", desc: "", keywords:["wx","weixin"], website: "https://weixin.qq.com/" }
     ]
   }
 ,
