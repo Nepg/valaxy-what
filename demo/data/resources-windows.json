@@ -94,14 +94,33 @@
       "icon": "/icons/360Drv.ico",
       "name": "360驱动大师",
       "desc": "不限速版本",
+      "keywords": [
+        "gpu",
+        "显卡",
+        "主板",
+        "网卡"
+      ],
       "pan": "https://wwanv.lanzoum.com/ipj9C3x7ofsb"
     },
     {
       "icon": "/icons/DrvCeo.ico",
       "name": "驱动总裁",
       "desc": "一键安装驱动，可能装错导致蓝屏",
+      "keywords": [
+        "gpu",
+        "显卡",
+        "主板",
+        "网卡"
+      ],
       "website": "https://www.sysceo.com/software-softwarei-id-258.html",
       "pan": "https://wwanv.lanzoum.com/iIUzT3x7ok4h"
+    },
+    {
+      "icon": "/icons/3DP_Net.ico",
+      "name": "3DP_Net",
+      "desc": "万能网卡驱动",
+      "website": "https://www.3dpchip.com/3dpchip/3dp/net_down_zh_cn.php",
+      "pan": "https://share.feijipan.com/s/Dbzf44cR"
     }
   ]
 },
