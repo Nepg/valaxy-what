@@ -57,7 +57,7 @@ function handleLinkClick(e: Event, link: string) {
 function handleBackToTop() {
   activeId.value = ''
   closeDrawer()
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  window.scrollTo({ top: 0, behavior: 'instant' })
 }
 
 function handleKeydown(e: KeyboardEvent) {
@@ -282,13 +282,23 @@ onUnmounted(() => {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-/* 桌面端：将回到顶部按钮定位到左侧目录旁 */
-@media (min-width: 1025px) {
+/* 桌面端：宽屏（>1400px，内容居中） */
+@media (min-width: 1401px) {
   .ant‑style‑backtop {
-    right: auto; /* 取消右侧对齐 */
-    /* 根据左侧栏布局计算左侧位置：内容最大宽度1400px居中，减去目录宽度和间距 */
-    left: calc((100% - 1400px) / 2 + 1400px - 200px - 50px); 
-    bottom: 40px; /* 保持距离底部一定距离 */
+    right: auto;
+    /* 内容左边缘 + 内容宽 - 目录宽 - 间距 - 按钮宽 - 间隙 */
+    left: calc((100% - 1400px) / 2 + 1400px - 200px - 50px);
+    bottom: 40px;
+  }
+}
+
+/* 桌面端：窄屏（1025–1400px，内容贴边） */
+@media (min-width: 1025px) and (max-width: 1400px) {
+  .ant‑style‑backtop {
+    right: auto;
+    /* 视口右缘 - 目录宽 - 间距 - 按钮宽 - 间隙 */
+    left: calc(100% - 200px);
+    bottom: 40px;
   }
 }
 
