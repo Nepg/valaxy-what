@@ -270,8 +270,8 @@ onUnmounted(() => {
 
   /* 淡入动画 */
   opacity: 0;
-  animation: backtopFadeIn 0.24s ease forwards;
-  transition: background-color 0.24s ease, color 0.24s ease;
+  animation: backtopFadeIn 0.3s ease forwards;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 .ant‑style‑backtop:hover {
   background-color: var(--ark-surface);
@@ -279,7 +279,7 @@ onUnmounted(() => {
 }
 
 @keyframes backtopFadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 /* 桌面端：宽屏（>1400px，内容居中） */
