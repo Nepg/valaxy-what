@@ -15,7 +15,7 @@ const categories = [
     apps: [
       { icon: "/icons/nvidia.svg", name: "NVIDIA", desc: "", keywords:["显卡","英伟达","驱动","gpu"], website: "https://www.nvidia.cn/drivers/" },
       { icon: "/icons/amd.ico", name: "AMD", desc: "", keywords:["显卡","锐龙","驱动","gpu"], website: "https://www.amd.com/zh-cn/support/download/drivers.html" },
-      { icon: "/icons/ddu.png", name: "DDU", desc: "卸载显卡驱动",keywords:["gpu"] website: "https://www.wagnardsoft.com/", pan: "https://wwanv.lanzoum.com/iNq3D3x7nbad" },
+      { icon: "/icons/ddu.png", name: "DDU", desc: "卸载显卡驱动",keywords:["gpu"],website: "https://www.wagnardsoft.com/", pan: "https://wwanv.lanzoum.com/iNq3D3x7nbad" },
       { icon: "/icons/cpuz.ico", name: "CPU-Z", desc: "", website: "https://www.cpuid.com/softwares/cpu-z.html", pan: "https://wwanv.lanzoum.com/i6ecK3x7yj3a" },
       { icon: "/icons/GPU-Z.ico", name: "GPU-Z", desc: "", website: "https://www.techpowerup.com/download/techpowerup-gpu-z/", pan: "https://wwanv.lanzoum.com/iyjPs3x7ykud" },
       { icon: "/icons/aida64.png", name: "AIDA64", desc: "压力测试", website: "https://www.aida64.com/downloads" },
@@ -51,7 +51,7 @@ const categories = [
       { icon: "/icons/hibituninstaller.png", name: "HiBit Uninstaller", desc: "卸载工具", website: "https://hibitsoft.ir/Uninstaller.html", pan: "https://wwanv.lanzoum.com/i8FX73ysrv3c" },
       { icon: "/icons/KeePassXC.svg", name: "KeePassXC", desc: "密码管理", website: "https://github.com/keepassxreboot/keepassxc", pan: "https://wwanv.lanzoum.com/izCoD3xuh98b" },
       { icon: "/icons/Everything.ico", name: "Everything", desc: "", website: "https://www.voidtools.com/", pan: "https://wwanv.lanzoum.com/iS6mK3x807pc" },
-      { icon: "/icons/HandBrake.png", name: "HandBrake", desc: "视频格式转码", website: "https://handbrake.fr/downloads.php", pan: "https://wwanv.lanzoum.com/iqlCC3x6scfi" },
+      { icon: "/icons/HandBrake.png", name: "HandBrake", desc: "视频格式转码",  keywords:[docs"video","mp4"],website: "https://handbrake.fr/downloads.php", pan: "https://wwanv.lanzoum.com/iqlCC3x6scfi" },
       { icon: "/icons/Snipaste.svg", name: "Snipaste", desc: "截图 / 贴图", website: "https://zh.snipaste.com/", pan: "https://wwanv.lanzoum.com/iySFm3x6rohg" },
       { icon: "/icons/Glance.ico", name: "Glance", desc: "截图翻译", website: "https://github.com/Harukaon/Glance", pan: "https://wwanv.lanzoum.com/ivFyp3y7sdde" },
       { icon: "/icons/quickscan.png", name: "QuickScan", desc: "屏幕扫码工具", website: "https://github.com/yoli-mi/quickscan", pan: "https://share.feijipan.com/s/7vzFYZ0m" },
