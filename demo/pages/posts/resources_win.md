@@ -25,7 +25,7 @@ const categories = [
       { icon: "/icons/MSIAfterburner.ico", name: "微星小飞机", desc: "", website: "https://www.msi.com/Landing/afterburner/graphics-cards" },
       { icon: "/icons/tbtool.ico", name: "图吧工具箱", desc: "整合包", website: "https://www.tbtool.cn/", pan: "https://cloud.189.cn/web/share?code=i2auqeEBJjM3（访问码：yej5）" },
       { icon: "/icons/360Drv.ico", name: "360驱动大师", desc: "不限速版本", pan: "https://wwanv.lanzoum.com/ipj9C3x7ofsb" },
-      { icon: "/icons/DrvCeo.ico", name: "驱动总裁", desc: "一键安装驱动，可能装错导致蓝屏", website: "https://www.sysceo.com/software-softwarei-id-258.html", pan: "https://wwanv.lanzoum.com/iIUzT3x7ok4h" }
+      { icon: "/icons/DrvCeo.ico", name: "驱动总裁", desc: "一键安装驱动，可能装错导致蓝屏", website:"https://www.sysceo.com/software-softwarei-id-258.html", pan: "https://wwanv.lanzoum.com/iIUzT3x7ok4h"}
     ]
   }
 ,
@@ -51,13 +51,12 @@ const categories = [
       { icon: "/icons/hibituninstaller.png", name: "HiBit Uninstaller", desc: "卸载工具", website: "https://hibitsoft.ir/Uninstaller.html", pan: "https://wwanv.lanzoum.com/i8FX73ysrv3c" },
       { icon: "/icons/KeePassXC.svg", name: "KeePassXC", desc: "密码管理", website: "https://github.com/keepassxreboot/keepassxc", pan: "https://wwanv.lanzoum.com/izCoD3xuh98b" },
       { icon: "/icons/Everything.ico", name: "Everything", desc: "", website: "https://www.voidtools.com/", pan: "https://wwanv.lanzoum.com/iS6mK3x807pc" },
-      { icon: "/icons/HandBrake.png", name: "HandBrake", desc: "视频格式转码",  keywords:[docs"video","mp4"],website: "https://handbrake.fr/downloads.php", pan: "https://wwanv.lanzoum.com/iqlCC3x6scfi" },
+      { icon: "/icons/HandBrake.png", name: "HandBrake", desc: "视频格式转码",  keywords:["video","mp4"],website: "https://handbrake.fr/downloads.php", pan: "https://wwanv.lanzoum.com/iqlCC3x6scfi" },
       { icon: "/icons/Snipaste.svg", name: "Snipaste", desc: "截图 / 贴图", website: "https://zh.snipaste.com/", pan: "https://wwanv.lanzoum.com/iySFm3x6rohg" },
       { icon: "/icons/Glance.ico", name: "Glance", desc: "截图翻译", website: "https://github.com/Harukaon/Glance", pan: "https://wwanv.lanzoum.com/ivFyp3y7sdde" },
       { icon: "/icons/quickscan.png", name: "QuickScan", desc: "屏幕扫码工具", website: "https://github.com/yoli-mi/quickscan", pan: "https://share.feijipan.com/s/7vzFYZ0m" },
       { icon: "/icons/ContextMenuManager.ico", name: "ContextMenuManager", desc: "右键菜单管理", website: "https://bluepointlilac.github.io/ContextMenuManager/", pan: "https://wwanv.lanzoum.com/ip3Ty3x6rvlc" },
       { icon: "/icons/FastCopy.ico", name: "FastCopy", desc: "快速复制", website: "https://fastcopy.jp/", pan: "https://wwanv.lanzoum.com/imjm83y7s6dc" }
-
     ]
   }
 ,
@@ -66,7 +65,7 @@ const categories = [
     apps: [
       { icon: "/icons/steam.ico", name: "Steam", desc: "", website: "https://store.steampowered.com/" },
       { icon: "/icons/EpicGames.ico", name: "Epic", desc: "", website: "https://www.epicgames.com/site/home?lang=zh-CN" },
-      { icon: "/icons/wegame.png", name: "WeGame", desc: "腾讯", website: "https://www.wegame.com.cn/home/" },
+      { icon: "/icons/wegame.png", name: "WeGame", desc: " 腾讯", website: "https://www.wegame.com.cn/home/" },
       { icon: "/icons/steamzg.webp", name: "小叽资源", desc: "dddd", website: "https://steamzg.com/" },
       { icon: "/icons/Gamer520.png", name: "Gamer520", desc: "dddd", website: "https://www.gamer520.com/" },
       { icon: "/icons/Steam++.ico", name: "Watt Toolkit", desc: "加速器，原名Steam++", website: "https://steampp.net/" },
