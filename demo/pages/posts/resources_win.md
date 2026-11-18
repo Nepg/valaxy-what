@@ -13,8 +13,8 @@ const categories = [
   {
     title: "硬件、驱动",
     apps: [
-      { icon: "/icons/nvidia.svg", name: "NVIDIA", desc: "", website: "https://www.nvidia.cn/drivers/" },
-      { icon: "/icons/amd.ico", name: "AMD", desc: "", website: "https://www.amd.com/zh-cn/support/download/drivers.html" },
+      { icon: "/icons/nvidia.svg", name: "NVIDIA", desc: "", keywords:["显卡","英伟达","驱动"], website: "https://www.nvidia.cn/drivers/" },
+      { icon: "/icons/amd.ico", name: "AMD", desc: "", keywords:["显卡","锐龙","驱动"], website: "https://www.amd.com/zh-cn/support/download/drivers.html" },
       { icon: "/icons/ddu.png", name: "DDU", desc: "卸显卡驱动", website: "https://www.wagnardsoft.com/", pan: "https://wwanv.lanzoum.com/iNq3D3x7nbad" },
       { icon: "/icons/cpuz.ico", name: "CPU-Z", desc: "", website: "https://www.cpuid.com/softwares/cpu-z.html", pan: "https://wwanv.lanzoum.com/i6ecK3x7yj3a" },
       { icon: "/icons/GPU-Z.ico", name: "GPU-Z", desc: "", website: "https://www.techpowerup.com/download/techpowerup-gpu-z/", pan: "https://wwanv.lanzoum.com/iyjPs3x7ykud" },
@@ -38,8 +38,8 @@ const categories = [
       { icon: "/icons/xunlei.png", name: "迅雷", desc: "", website: "https://dl.xunlei.com/", pan: "https://wwanv.lanzoum.com/iOo1S3x7kt4h" },
       { icon: "/icons/LocalSend.png", name: "LocalSend", desc: "局域网传文件", website: "https://localsend.org/zh-TW/download", pan: "https://wwanv.lanzoum.com/iIl6o48qvu7c" },
       { icon: "/icons/radminvpn.png", name: "Radmin VPN", desc: "组网", website: "https://www.radmin-lan.cn/", pan: "https://share.feijipan.com/s/trxocp88" },
-      { icon: "/icons/natpierce.ico", name: "皎月连", desc: "p2p内网穿透", website: "https://www.natpierce.cn/" },
-      { icon: "/icons/SubnetDesk.ico", name: "SubnetDesk", desc: "搭配p2p实现远程桌面", website: "https://github.com/zibo-chen/SubnetDesk", pan: "https://wwanv.lanzouc.com/iDHGL4a2n2jg" },
+      { icon: "/icons/natpierce.ico", name: "皎月连", desc: "p2p内网穿透", keywords:["游戏联机"], website: "https://www.natpierce.cn/" },
+      { icon: "/icons/SubnetDesk.ico", name: "SubnetDesk", desc: "搭配p2p实现远程桌面", keywords:["游戏联机"], website: "https://github.com/zibo-chen/SubnetDesk", pan: "https://wwanv.lanzouc.com/iDHGL4a2n2jg" },
       { icon: "/icons/uuyc.ico", name: "网易UU远程", desc: "远程", website: "https://uuyc.163.com/" }
     ]
   }
@@ -47,7 +47,7 @@ const categories = [
   {
     title: "桌面、效率",
     apps: [
-      { icon: "/icons/nanazip.ico", name: "NanaZip", desc: "解压缩", website: "https://nanazip.org/", pan: "https://share.feijipan.com/s/xExo1FtC" },
+      { icon: "/icons/nanazip.ico", name: "NanaZip", desc: "解压缩", keywords:["7z","rar"], website: "https://nanazip.org/", pan: "https://share.feijipan.com/s/xExo1FtC"},
       { icon: "/icons/hibituninstaller.png", name: "HiBit Uninstaller", desc: "卸载工具", website: "https://hibitsoft.ir/Uninstaller.html", pan: "https://wwanv.lanzoum.com/i8FX73ysrv3c" },
       { icon: "/icons/KeePassXC.svg", name: "KeePassXC", desc: "密码管理", website: "https://github.com/keepassxreboot/keepassxc", pan: "https://wwanv.lanzoum.com/izCoD3xuh98b" },
       { icon: "/icons/Everything.ico", name: "Everything", desc: "", website: "https://www.voidtools.com/", pan: "https://wwanv.lanzoum.com/iS6mK3x807pc" },
@@ -67,8 +67,8 @@ const categories = [
       { icon: "/icons/steam.ico", name: "Steam", desc: "", website: "https://store.steampowered.com/" },
       { icon: "/icons/EpicGames.ico", name: "Epic", desc: "", website: "https://www.epicgames.com/site/home?lang=zh-CN" },
       { icon: "/icons/wegame.png", name: "WeGame", desc: "腾讯", website: "https://www.wegame.com.cn/home/" },
-      { icon: "/icons/steamzg.webp", name: "小叽资源", desc: "", website: "https://steamzg.com/" },
-      { icon: "/icons/Gamer520.png", name: "Gamer520", desc: "", website: "https://www.gamer520.com/" },
+      { icon: "/icons/steamzg.webp", name: "小叽资源", desc: "dddd", website: "https://steamzg.com/" },
+      { icon: "/icons/Gamer520.png", name: "Gamer520", desc: "dddd", website: "https://www.gamer520.com/" },
       { icon: "/icons/Steam++.ico", name: "Watt Toolkit", desc: "加速器，原名Steam++", website: "https://steampp.net/" },
       { icon: "/icons/xunyou.ico", name: "迅游加速器", desc: "", website: "https://www.xunyou.com/" },
       { icon: "/icons/uu.png", name: "网易UU加速器", desc: "", website: "https://uu.163.com/" },
@@ -84,13 +84,13 @@ const categories = [
   {
     title: "媒体、日常",
     apps: [
-      { icon: "/icons/mpv.ico", name: "mpv-lazy", desc: "补帧懒人包，hooke007 维护，安装即用", website: "https://github.com/hooke007/mpv_PlayKit", pan: "https://cloud.189.cn/web/share?code=B3MNBvVzueAb（访问码：bb8g）" },
-      { icon: "/icons/potplayer.png", name: "Potplayer", desc: "", website: "https://potplayer.tv/", pan: "https://wwi.lanzoui.com/xxxx" },
-      { icon: "/icons/MusicPlayer2.png", name: "MusicPlayer2", desc: "众里寻他千百度", website: "https://github.com/zhongyang219/MusicPlayer2", pan: "https://share.feijipan.com/s/lEzFwpBC"  },
-      { icon: "/icons/chrome.svg", name: "Chrome", desc: "", website: "https://www.google.cn/chrome/", pan: "https://cloud.189.cn/web/share?code=3QVbQjBzmu2q（访问码：5krq）" },
-      { icon: "/icons/helium.png", name: "Helium", desc: "", website: "https://github.com/imputnet/helium", pan: "https://share.feijipan.com/s/buzGTxRA" },
+      { icon: "/icons/mpv.ico", name: "mpv-lazy", desc: "补帧懒人包，hooke007 维护，安装即用", keywords:["视频播放器"], website: "https://github.com/hooke007/mpv_PlayKit", pan: "https://cloud.189.cn/web/share?code=B3MNBvVzueAb（访问码：bb8g）" },
+      { icon: "/icons/potplayer.png", name: "Potplayer", desc: "", keywords:["视频播放器"], website: "https://potplayer.tv/", pan: "https://wwi.lanzoui.com/xxxx" },
+      { icon: "/icons/MusicPlayer2.png", name: "MusicPlayer2", desc: "众里寻他千百度",keywords:["本地音乐播放器"],  website: "https://github.com/zhongyang219/MusicPlayer2", pan: "https://share.feijipan.com/s/lEzFwpBC"  },
+      { icon: "/icons/chrome.svg", name: "Chrome", desc: "", keywords:["谷歌浏览器","Chromium 内核"], website: "https://www.google.cn/chrome/", pan: "https://cloud.189.cn/web/share?code=3QVbQjBzmu2q（访问码：5krq）" },
+      { icon: "/icons/helium.png", name: "Helium", desc: "", keywords:["浏览器","Chromium 内核"],website: "https://github.com/imputnet/helium", pan: "https://share.feijipan.com/s/buzGTxRA" },
       { icon: "/icons/PDFgear.png", name: "PDFgear", desc: "PDF编辑器", website: "https://www.pdfgear.com/zh/" },
-      { icon: "/icons/wps.png", name: "WPS", desc: "", website: "https://www.wps.cn/", pan: "https://share.feijipan.com/s/fizTfgK1"  },
+      { icon: "/icons/wps.png", name: "WPS", desc: "", keywords:["word","excel","pdf","ppt","文档","表格","演示"], website: "https://www.wps.cn/", pan: "https://share.feijipan.com/s/fizTfgK1"  },
       { icon: "/icons/qq.ico", name: "QQ", desc: "", website: "https://im.qq.com/download" },
       { icon: "/icons/weChat.png", name: "微信", desc: "", website: "https://weixin.qq.com/" }
     ]
@@ -101,36 +101,42 @@ const categories = [
     apps: [
       { icon: "/icons/HEU_KMS_Activator.ico", name: "HEU_KMS_Activator", desc: "dddd", website: "https://github.com/zbezj/HEU_KMS_Activator", pan: "https://wwanv.lanzoum.com/i0F3C48qxa5c" },
       { icon: "/icons/windows10.svg", name: "Win10_KMS_V3", desc: "dddd", pan: "https://wwanv.lanzoum.com/irGk63x7ngve" },
-      { icon: "/icons/microsoft-color.svg", name: "微软常用运行库", desc: "", pan: "https://share.feijipan.com/s/A0xoDw2W" },
+      { icon: "/icons/microsoft-color.svg", name: "微软常用运行库", desc: "", keywords:["Visual C++","VC++"], pan: "https://share.feijipan.com/s/A0xoDw2W" },
       { icon: "/icons/DirectXRepair.ico", name: "DirectX_Repair", desc: "dx修复", pan: "https://cloud.189.cn/web/share?code=neayqyQVFFRv（访问码：5fw0）" },
       { icon: "/icons/NET.png", name: ".NET Desktop Runtime", desc: ".NET 桌面运行时", website: "https://dotnet.microsoft.com/zh-cn/download/dotnet", pan: "https://www.alipan.com/s/spCsc745c1o" },
-      { icon: "/icons/windows11.svg", name: "Win11Debloat", desc: "win10、11精简", website: "https://github.com/Raphire/Win11Debloat", pan: "https://wwanv.lanzoum.com/iGjab3yfrukf" },
+      { icon: "/icons/windows11.svg", name: "Win11Debloat", desc: "win10、11精简", keywords:["windows10","windows11"], website: "https://github.com/Raphire/Win11Debloat", pan: "https://wwanv.lanzoum.com/iGjab3yfrukf" },
       { icon: "/icons/Dismpp.ico", name: "Dism++", desc: "系统优化", website: "https://www.chuyu.me/zh-Hans/", pan: "https://wwanv.lanzoum.com/iIcgD3x6rhsf" },
       { icon: "/icons/WinDirStat.ico", name: "WinDirStat", desc: "磁盘空间占用", website: "https://github.com/windirstat/windirstat", pan: "https://wwanv.lanzouc.com/iulOw4a2thpi" },
       { icon: "/icons/SuperKillller.png", name: "360系统急救箱", desc: "杀毒", website: "https://weishi.360.cn/jijiuxiang/", pan: "https://share.feijipan.com/s/a5zTfRZX" },
       { icon: "/icons/huorong.svg", name: "火绒恶性木马专杀工具", desc: "杀毒", website: "https://bbs.huorong.cn/thread-18575-1-1.html" , pan :"https://share.feijipan.com/s/VZzTgA0s"},
-      { icon: "/icons/xitongku.ico", name: "MSDN", desc: "Windows镜像下载", website: "https://www.xitongku.com/index.html" },
-      { icon: "/icons/msdl.ico", name: "MSDL", desc: "Windows镜像下载", website: "https://msdl.gravesoft.dev/#" },
+      { icon: "/icons/xitongku.ico", name: "MSDN", desc: "Windows镜像下载", keywords:["win7","win10","win11","windows7","windows10","windows11","安装包","镜像","iso"], website: "https://www.xitongku.com/index.html" },
+      { icon: "/icons/msdl.ico", name: "MSDL", desc: "Windows镜像下载", keywords:["win7","win10","win11","windows7","windows10","windows11","安装包","镜像","iso"], website: "https://msdl.gravesoft.dev/#" },
       { icon: "/icons/ventoy.png", name: "Ventoy", desc: "", website: "https://www.ventoy.net/cn/", pan: "https://wwanv.lanzoum.com/iIV8W3x6udpg" },
       { icon: "/icons/wepe.png", name: "微PE工具箱", desc: "", website: "https://www.wepe.com.cn/", pan: "https://cloud.189.cn/web/share?code=N7N7faMjYreu（访问码：q5ee）" },
       { icon: "/icons/ntpwlogo.png", name: "NTPWEdit 0.7", desc: "PE环境使用（系统密码管理）", website: "http://www.cdslow.org.ru/en/ntpwedit/", pan: "https://wwanv.lanzoum.com/iWPy93x6t1tc" }
     ]
   }
 ]
-
 // 核心：利用 computed 实时过滤数据
 const filteredCategories = computed(() => {
   if (!searchQuery.value) return categories
-  
+
   const query = searchQuery.value.toLowerCase()
-  
+
   return categories.map(category => {
     return {
       ...category,
-      apps: category.apps.filter(app => 
-        app.name.toLowerCase().includes(query) || 
-        (app.desc && app.desc.toLowerCase().includes(query))
-      )
+      apps: category.apps.filter(app => {
+        // 匹配名称 / 描述 / keywords关键词数组
+        const matchName = app.name.toLowerCase().includes(query)
+        const matchDesc = app.desc && app.desc.toLowerCase().includes(query)
+        // 处理keywords，兼容没有写keywords的旧数据（防止报错）
+        const matchKeywords = Array.isArray(app.keywords)
+          ? app.keywords.some(k => k.toLowerCase().includes(query))
+          : false
+
+        return matchName || matchDesc || matchKeywords
+      })
     }
   }).filter(category => category.apps.length > 0) // 如果该分类下没有匹配的App，直接隐藏该分类
 })

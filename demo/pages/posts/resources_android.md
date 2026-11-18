@@ -7,9 +7,7 @@ hideHeader: true
 
 <script setup>
 import { ref, computed } from 'vue'
-
 const searchQuery = ref('')
-
 const categories = [
   {
     title: "未分类",
@@ -21,34 +19,41 @@ const categories = [
       { icon: "/icons/foldersync.png", name: "FolderSync", desc: "文件同步", website: "https://foldersync.io/", pan: "https://share.feijipan.com/s/YgyttS1i" },
       { icon: "/icons/mt.png", name: "MT管理器", desc: "", website: "https://mt2.cn/", pan: "https://share.feijipan.com/s/5wyttyZO" },
       { icon: "/icons/twinfile.png", name: "Twinfile", desc: "双栏文件管理器", website: "https://github.com/copylee711/twinfile", pan: "https://share.feijipan.com/s/jcytu01u" },
-      { icon: "/icons/snapseed.png", name: "Snapseed", desc: "图片编辑", website: "https://play.google.com/store/apps/details?id=com.niksoftware.snapseed", pan: "https://share.feijipan.com/s/DLytuoLO" },
+      { icon: "/icons/snapseed.png", name: "Snapseed", desc: "图片编辑",  website: "https://play.google.com/store/apps/details?id=com.niksoftware.snapseed", pan: "https://share.feijipan.com/s/DLytuoLO" },
       { icon: "/icons/lotus.png", name: "Lotus", desc: "音乐播放器", website: "https://github.com/Bjorn99/lotus", pan: "https://share.feijipan.com/s/zDytuKuz" },
-      { icon: "/icons/plees_tracker.png", name: "Plees Tracker", desc: "", website: "https://github.com/vmiklos/plees-tracker", pan: "https://share.feijipan.com/s/n2ytLI6H" },
+      { icon: "/icons/plees_tracker.png", name: "Plees Tracker", desc: "",  website: "https://github.com/vmiklos/plees-tracker", pan: "https://share.feijipan.com/s/n2ytLI6H" },
       { icon: "/icons/markleaf.png", name: "Markleaf", desc: "", website: "https://github.com/jeiel85/markleaf-android", pan: "https://share.feijipan.com/s/0LytL7uN" },
       { icon: "/icons/gogogo.png", name: "影梭", desc: "模拟定位", website: "https://github.com/ZCShou/GoGoGo", pan: "https://share.feijipan.com/s/6Wyttcwz" },
       { icon: "/icons/appiconextractor.png", name: "图标提取器", desc: "", website: "https://github.com/0liuuil0/AppIconExtractor", pan: "https://share.feijipan.com/s/PxytLjSS" },
-      { icon: "/icons/via.png", name: "Via", desc: "浏览器", website: "https://viayoo.com/zh-cn/", pan: "https://share.feijipan.com/s/lzyuDAzd" }
+      { icon: "/icons/via.png", name: "Via", desc: "", website: "https://viayoo.com/zh-cn/", pan: "https://share.feijipan.com/s/lzyuDAzd" }
     ]
   }
 ]
-
 // 核心：利用 computed 实时过滤数据
 const filteredCategories = computed(() => {
   if (!searchQuery.value) return categories
-  
+
   const query = searchQuery.value.toLowerCase()
-  
+
   return categories.map(category => {
     return {
       ...category,
-      apps: category.apps.filter(app => 
-        app.name.toLowerCase().includes(query) || 
-        (app.desc && app.desc.toLowerCase().includes(query))
-      )
+      apps: category.apps.filter(app => {
+        // 匹配名称 / 描述 / keywords关键词数组
+        const matchName = app.name.toLowerCase().includes(query)
+        const matchDesc = app.desc && app.desc.toLowerCase().includes(query)
+        // 处理keywords，兼容没有写keywords的旧数据（防止报错）
+        const matchKeywords = Array.isArray(app.keywords)
+          ? app.keywords.some(k => k.toLowerCase().includes(query))
+          : false
+
+        return matchName || matchDesc || matchKeywords
+      })
     }
   }).filter(category => category.apps.length > 0) // 如果该分类下没有匹配的App，直接隐藏该分类
 })
 </script>
+
 
 <!-- 搜索框 UI -->
 <div class="ak-search-wrapper">
