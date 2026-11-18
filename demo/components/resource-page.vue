@@ -1,61 +1,47 @@
----
-title: 安卓资源整理
-date: 2026-11-14
-updated: 2026-11-18
-hideHeader: true
----
-
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
+
+interface ResourceApp {
+  icon: string
+  name: string
+  desc?: string
+  website?: string
+  pan?: string
+  keywords?: string[]
+}
+
+interface ResourceCategory {
+  title: string
+  apps: ResourceApp[]
+}
+
+const props = withDefaults(defineProps<{
+  categories: ResourceCategory[]
+  placeholder?: string
+}>(), {
+  // 默认就是你的终端风格，各页面可覆盖文案部分
+  placeholder: '[SEARCH_INPUT] / 查找软件、功能...'
+})
+
 const searchQuery = ref('')
-const categories = [
-  {
-    title: "未分类",
-    apps: [
-      { icon: "/icons/KeePassDX.png", name: "KeePassDX", desc: "密码管理", website: "https://github.com/Kunzisoft/KeePassDX", pan: "https://wwanv.lanzoum.com/ie9ii3xulztc" },
-      { icon: "/icons/LocalSend.png", name: "LocalSend", desc: "局域网传文件", website: "https://localsend.org/zh-TW/download", pan: "https://wwanv.lanzoum.com/iUhK748qvsyh" },
-      { icon: "/icons/gallery.png", name: "Gallery", desc: "图库", website: "https://github.com/FossifyOrg/Gallery", pan: "https://wwanv.lanzoum.com/iI30N3yfr6fg" },
-      { icon: "/icons/nextplayer.png", name: "Next Player", desc: "视频播放", website: "https://github.com/anilbeesetti/nextplayer", pan: "https://wwanv.lanzoum.com/iHr8C3yfrdib" },
-      { icon: "/icons/foldersync.png", name: "FolderSync", desc: "文件同步", website: "https://foldersync.io/", pan: "https://share.feijipan.com/s/YgyttS1i" },
-      { icon: "/icons/mt.png", name: "MT管理器", desc: "", website: "https://mt2.cn/", pan: "https://share.feijipan.com/s/5wyttyZO" },
-      { icon: "/icons/twinfile.png", name: "Twinfile", desc: "双栏文件管理器", website: "https://github.com/copylee711/twinfile", pan: "https://share.feijipan.com/s/jcytu01u" },
-      { icon: "/icons/snapseed.png", name: "Snapseed", desc: "图片编辑",  website: "https://play.google.com/store/apps/details?id=com.niksoftware.snapseed", pan: "https://share.feijipan.com/s/DLytuoLO" },
-      { icon: "/icons/lotus.png", name: "Lotus", desc: "音乐播放器", website: "https://github.com/Bjorn99/lotus", pan: "https://share.feijipan.com/s/zDytuKuz" },
-      { icon: "/icons/plees_tracker.png", name: "Plees Tracker", desc: "",  website: "https://github.com/vmiklos/plees-tracker", pan: "https://share.feijipan.com/s/n2ytLI6H" },
-      { icon: "/icons/markleaf.png", name: "Markleaf", desc: "", website: "https://github.com/jeiel85/markleaf-android", pan: "https://share.feijipan.com/s/0LytL7uN" },
-      { icon: "/icons/gogogo.png", name: "影梭", desc: "模拟定位", website: "https://github.com/ZCShou/GoGoGo", pan: "https://share.feijipan.com/s/6Wyttcwz" },
-      { icon: "/icons/appiconextractor.png", name: "图标提取器", desc: "", website: "https://github.com/0liuuil0/AppIconExtractor", pan: "https://share.feijipan.com/s/PxytLjSS" },
-      { icon: "/icons/via.png", name: "Via", desc: "", website: "https://viayoo.com/zh-cn/", pan: "https://share.feijipan.com/s/lzyuDAzd" }
-    ]
-  }
-]
-// 核心：利用 computed 实时过滤数据
+
 const filteredCategories = computed(() => {
-  if (!searchQuery.value) return categories
-
+  if (!searchQuery.value) return props.categories
   const query = searchQuery.value.toLowerCase()
-
-  return categories.map(category => {
-    return {
+  return props.categories
+    .map(category => ({
       ...category,
-      apps: category.apps.filter(app => {
-        // 匹配名称 / 描述 / keywords关键词数组
-        const matchName = app.name.toLowerCase().includes(query)
-        const matchDesc = app.desc && app.desc.toLowerCase().includes(query)
-        // 处理keywords，兼容没有写keywords的旧数据（防止报错）
-        const matchKeywords = Array.isArray(app.keywords)
-          ? app.keywords.some(k => k.toLowerCase().includes(query))
-          : false
-
-        return matchName || matchDesc || matchKeywords
-      })
-    }
-  }).filter(category => category.apps.length > 0) // 如果该分类下没有匹配的App，直接隐藏该分类
+      apps: category.apps.filter(app =>
+        app.name.toLowerCase().includes(query) ||
+        (app.desc && app.desc.toLowerCase().includes(query)) ||
+        (app.keywords && app.keywords.some(k => k.toLowerCase().includes(query)))
+      )
+    }))
+    .filter(category => category.apps.length > 0)
 })
 </script>
 
-
-<!-- 搜索框 UI -->
+<template>
 <div class="ak-search-wrapper">
   <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
   <input 
@@ -67,20 +53,20 @@ const filteredCategories = computed(() => {
   <div v-if="searchQuery" class="search-clear" @click="searchQuery = ''">✕</div>
 </div>
 
-<div class="category-list">
-  <div v-for="(category, index) in filteredCategories" :key="index" class="category-block">
-    <h2 :id="category.title">{{ category.title }}</h2>
-    <div class="resource-grid">
-      <ResourceCard v-for="app in category.apps" :key="app.name" v-bind="app" />
+  <div class="category-list">
+    <div v-for="(category, index) in filteredCategories" :key="index" class="category-block">
+      <h2 :id="category.title">{{ category.title }}</h2>
+      <div class="resource-grid">
+        <resource-card v-for="app in category.apps" :key="app.name" v-bind="app" />
+      </div>
+    </div>
+
+    <div v-if="filteredCategories.length === 0" class="ak-empty-state">
+      <div class="empty-code">ERR_404 / NO_DATA</div>
+      <p>未检索到匹配项。</p>
     </div>
   </div>
-  
-  <!-- 无结果时的空状态 -->
-  <div v-if="filteredCategories.length === 0" class="ak-empty-state">
-    <div class="empty-code">ERR_404 / NO_DATA</div>
-    <p>未检索到匹配项。</p>
-  </div>
-</div>
+</template>
 
 <style>
 /* --- 搜索框终端风格样式 --- */
