@@ -217,14 +217,14 @@ onUnmounted(() => {
     height: 44px; width: 44px; position: fixed; top: 100px; z-index: 100; padding: 0;
     display: flex; align-items: center; justify-content: center;
     background: var(--ark-surface); border: 1px solid var(--ark-line); color: var(--ark-ink);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); cursor: pointer;
+    cursor: pointer;
   }
 
   .toc-overlay { position: fixed; inset: 0; background-color: transparent; z-index: 999; }
   .mobile-toc-drawer {
     position: fixed; top: 0; right: 0; bottom: 0; width: 280px; background-color: var(--ark-paper);
     z-index: 1000; padding: 0; display: flex; flex-direction: column;
-    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15); border-left: 1px solid var(--ark-line);
+    border-left: 1px solid var(--ark-line);
     transform: translateX(100%); transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden; overscroll-behavior: contain;
   }
@@ -262,20 +262,19 @@ onUnmounted(() => {
   border: 1px solid var(--ark-line);
   background-color: var(--ark-paper);
   color: var(--ark-ink);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-
   /* 淡入动画 */
   opacity: 0;
   animation: backtopFadeIn 0.3s ease forwards;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 }
 .ant‑style‑backtop:hover {
   background-color: var(--ark-surface);
   color: var(--ark-accent);
+  border-color: var(--ark-accent);
 }
 
 @keyframes backtopFadeIn {
