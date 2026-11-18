@@ -13,9 +13,9 @@ const categories = [
   {
     title: "硬件、驱动",
     apps: [
-      { icon: "/icons/nvidia.svg", name: "NVIDIA", desc: "", keywords:["显卡","英伟达","驱动"], website: "https://www.nvidia.cn/drivers/" },
-      { icon: "/icons/amd.ico", name: "AMD", desc: "", keywords:["显卡","锐龙","驱动"], website: "https://www.amd.com/zh-cn/support/download/drivers.html" },
-      { icon: "/icons/ddu.png", name: "DDU", desc: "卸显卡驱动", website: "https://www.wagnardsoft.com/", pan: "https://wwanv.lanzoum.com/iNq3D3x7nbad" },
+      { icon: "/icons/nvidia.svg", name: "NVIDIA", desc: "", keywords:["显卡","英伟达","驱动","gpu"], website: "https://www.nvidia.cn/drivers/" },
+      { icon: "/icons/amd.ico", name: "AMD", desc: "", keywords:["显卡","锐龙","驱动","gpu"], website: "https://www.amd.com/zh-cn/support/download/drivers.html" },
+      { icon: "/icons/ddu.png", name: "DDU", desc: "卸载显卡驱动",keywords:["gpu"] website: "https://www.wagnardsoft.com/", pan: "https://wwanv.lanzoum.com/iNq3D3x7nbad" },
       { icon: "/icons/cpuz.ico", name: "CPU-Z", desc: "", website: "https://www.cpuid.com/softwares/cpu-z.html", pan: "https://wwanv.lanzoum.com/i6ecK3x7yj3a" },
       { icon: "/icons/GPU-Z.ico", name: "GPU-Z", desc: "", website: "https://www.techpowerup.com/download/techpowerup-gpu-z/", pan: "https://wwanv.lanzoum.com/iyjPs3x7ykud" },
       { icon: "/icons/aida64.png", name: "AIDA64", desc: "压力测试", website: "https://www.aida64.com/downloads" },
