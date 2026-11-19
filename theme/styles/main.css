@@ -435,9 +435,9 @@ body {
   padding: 29px 12px 29px 0;
   border-bottom: 1px solid var(--ark-line);
 }
-.ark-post-row:hover {
+/* .ark-post-row:hover {
   background: var(--ak-surface-panel);
-}
+} */
 .ark-post-number {
   font: 12px var(--ak-font-mono);
   color: var(--ak-text-secondary);

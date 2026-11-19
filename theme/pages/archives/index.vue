@@ -8,12 +8,13 @@ const text = useArknightsText()
 
 <template>
   <main id="ark-main" class="ark-archive-page" tabindex="-1">
-    <header>
-      <!-- <p class="ark-eyebrow">
+    <!-- <header>
+      <p class="ark-eyebrow">
         THE COMPLETE FIELD NOTES
-      </p> -->
+      </p>
       <h1>{{ text.archive }}</h1>
-    </header><ArknightsPostList :posts="posts" :title="text.all" />
+    </header> -->
+    <ArknightsPostList :posts="posts" :title="text.all" />
   </main>
 </template>
 

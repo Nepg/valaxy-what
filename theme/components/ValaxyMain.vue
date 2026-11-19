@@ -21,6 +21,9 @@ const outlineEnabled = computed(() => (props.frontmatter.outline ?? theme.value.
         <!-- <RouterLink to="/archives/" class="ark-back">
           ← {{ text.back }}
         </RouterLink> -->
+        <RouterLink to="/archives/" class="ark-back">
+          ← {{ text.back }}
+        </RouterLink>
         <h1>{{ $tO(frontmatter.title) }}</h1>
         <p v-if="frontmatter.description" class="ark-article-description">
           {{ frontmatter.description }}

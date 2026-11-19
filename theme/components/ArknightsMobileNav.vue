@@ -25,7 +25,8 @@ onScopeDispose(() => controller?.destroy())
 </script>
 
 <template>
-  <div class="ark-mobile-nav">
+  <div></div>
+  <!-- <div class="ark-mobile-nav">
     <button ref="trigger" class="ark-menu-trigger ak-site-control" type="button" :hidden="!ready" :aria-controls="id" aria-haspopup="dialog" aria-expanded="false">
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7h16M4 12h12M4 17h16" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
       <span class="ark-sr-only">{{ text.menu }}</span>
@@ -46,5 +47,5 @@ onScopeDispose(() => controller?.destroy())
         </template>
       </nav>
     </dialog>
-  </div>
+  </div> -->
 </template>

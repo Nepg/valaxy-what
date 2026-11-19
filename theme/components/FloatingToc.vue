@@ -213,7 +213,7 @@ onUnmounted(() => {
   .desktop-toc { display: none; }
   .mobile-toc-wrapper { display: block; }
   .mobile-toc-btn {
-    right: 48px;
+    right: 40px;
     height: 44px; width: 44px; position: fixed; top: 100px; z-index: 100; padding: 0;
     display: flex; align-items: center; justify-content: center;
     background: var(--ark-surface); border: 1px solid var(--ark-line); color: var(--ark-ink);
@@ -247,8 +247,12 @@ onUnmounted(() => {
     width: 10px;
   }
 }
-@media (max-width: 1000px) { .mobile-toc-btn { right: 32px; } }
-@media (max-width: 680px) { .mobile-toc-btn { right: 20px; } }
+@media (min-width: 1000px) and (max-width: 1024px) {
+  .mobile-toc-btn {
+    right: 56px;
+  }
+}
+@media (max-width: 680px) { .mobile-toc-btn { right: 28px;} } 
 
 /* ============= Ant‑Design风格悬浮BackTop按钮 ============= */
 .ant‑style‑backtop {

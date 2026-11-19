@@ -25,7 +25,7 @@ function reset() {
     <div class="ark-section-head">
       <h2 id="ark-archive-title">
         {{ title }}
-        <span class="ark-mono"> / ARCHIVE</span>
+        <span class="ark-mono"> / INDEX</span>
       </h2>
       <span class="ark-result-count" role="status">{{ filtered.length }} {{ text.results }}</span>
     </div>
