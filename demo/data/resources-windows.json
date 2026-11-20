@@ -121,6 +121,13 @@
       "desc": "万能网卡驱动",
       "website": "https://www.3dpchip.com/3dpchip/3dp/net_down_zh_cn.php",
       "pan": "https://share.feijipan.com/s/Dbzf44cR"
+    },
+    {
+      "icon": "/icons/DiskGenius.ico",
+      "name": "DiskGenius",
+      "desc": "硬盘分区管理",
+      "website": "https://www.diskgenius.cn/download.php",
+      "pan": "https://share.feijipan.com/s/Sazlhai6"
     }
   ]
 },

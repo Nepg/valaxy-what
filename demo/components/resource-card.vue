@@ -150,18 +150,23 @@ html.dark .card-title {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: var(--ark-surface); 
+  /* 不再用 var(--ark-surface) 纯白色底色 */
+  background-color: rgba(0,0,0,0.02);
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.3s ease;
   z-index: 0;
   border-radius: 4px;
 }
 .resource-card:hover::after { 
-  opacity: 0.4; 
+  opacity: 1; 
+}
+html.dark .resource-card::after {
+  background-color: rgba(255,255,255,0.07);
 }
 html.dark .resource-card:hover::after { 
-  opacity: 0.15; 
+  opacity: 1; 
 }
+
 
 /* 将左上角标绑定在最外层 */
 .resource-card::before {

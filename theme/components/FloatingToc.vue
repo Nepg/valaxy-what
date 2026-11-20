@@ -223,11 +223,7 @@ onUnmounted(() => {
   .toc-overlay {
     position: fixed; 
     inset: 0; 
-    
-    /* 👇 核心修改 1：加上半透明的暗色遮罩 */
     background-color: rgba(0, 0, 0, 0.3); 
-    
-    /* 👇 核心修改 2：加上毛玻璃模糊效果 */
     backdrop-filter: blur(4px); 
     -webkit-backdrop-filter: blur(4px); /* 兼容 Safari */
     
