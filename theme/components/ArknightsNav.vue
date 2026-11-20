@@ -58,12 +58,4 @@ const nav = computed(() => theme.value.nav.length
   background: var(--ak-surface-panel);
   border-color: var(--ak-signal-info);
 }
-
-/* 可选：hover状态保持原有交互 */
-.ark-appearance {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
 </style>

@@ -136,7 +136,7 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 24px;
-  min-height: 112px;
+  min-height: 100px;
   border-bottom: 1px solid var(--ark-line);
 }
 .ark-brand {

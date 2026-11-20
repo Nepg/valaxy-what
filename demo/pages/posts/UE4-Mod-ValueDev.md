@@ -4,8 +4,6 @@ date: 2026-11-14
 updated: 2026-11-16
 ---
 
-<div class="ue4-mod-article">
-
 ## 问题
 
 HumanitZ 无头服务器，马铃薯堆叠上限为 1。服务端无现成 Mod，客户端 Mod 不生效。
@@ -113,5 +111,3 @@ HumanitZ 无头服务器，马铃薯堆叠上限为 1。服务端无现成 Mod�
 | 脚本跑完没生效 | 修改后未保存 | 执行脚本后记得保存，否则修改不生效 |
 
 ![9](/UE4_Mod_ValueDev/9.png)
-
-</div>

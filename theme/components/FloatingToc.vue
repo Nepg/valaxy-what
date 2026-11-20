@@ -220,7 +220,27 @@ onUnmounted(() => {
     cursor: pointer;
   }
 
-  .toc-overlay { position: fixed; inset: 0; background-color: transparent; z-index: 999; }
+  .toc-overlay {
+    position: fixed; 
+    inset: 0; 
+    
+    /* 👇 核心修改 1：加上半透明的暗色遮罩 */
+    background-color: rgba(0, 0, 0, 0.3); 
+    
+    /* 👇 核心修改 2：加上毛玻璃模糊效果 */
+    backdrop-filter: blur(4px); 
+    -webkit-backdrop-filter: blur(4px); /* 兼容 Safari */
+    
+    z-index: 999;
+    /* 加上淡入动画，让遮罩出现更自然 */
+    animation: fadeIn 0.3s ease;
+  }
+
+  /* 定义遮罩淡入动画 */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
   .mobile-toc-drawer {
     position: fixed; top: 0; right: 0; bottom: 0; width: 280px; background-color: var(--ark-paper);
     z-index: 1000; padding: 0; display: flex; flex-direction: column;
@@ -264,7 +284,7 @@ onUnmounted(() => {
   height: 44px;
   border-radius: 50%;
   border: 1px solid var(--ark-line);
-  background-color: var(--ark-paper);
+  background: var(--ark-surface);
   color: var(--ark-ink);
   display: flex;
   align-items: center;
@@ -306,8 +326,8 @@ onUnmounted(() => {
 }
 
 /* 移动端适配悬浮按钮位置 */
-@media (max-width: 1024px) { .ant‑style‑backtop {     right: 48px; bottom: 40px; } }
-@media (max-width: 1000px) { .ant‑style‑backtop {     right: 32px;} }
-@media (max-width: 680px) { .ant‑style‑backtop { right: 20px; } }
+@media (max-width: 1024px) { .ant‑style‑backtop {     right: 40px; bottom: 40px; } }
+@media (min-width: 1000px) and (max-width: 1024px)  { .ant‑style‑backtop {     right: 56px;} }
+@media (max-width: 680px) { .ant‑style‑backtop { right: 28px; } }
 
 </style>
