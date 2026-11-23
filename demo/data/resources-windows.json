@@ -270,6 +270,20 @@
       "pan": "https://share.feijipan.com/s/7vzFYZ0m"
     },
     {
+      "icon": "/icons/Dismpp.ico",
+      "name": "Dism++",
+      "desc": "系统优化",
+      "website": "https://www.chuyu.me/zh-Hans/",
+      "pan": "https://wwanv.lanzoum.com/iIcgD3x6rhsf"
+    },
+    {
+      "icon": "/icons/WinDirStat.ico",
+      "name": "WinDirStat",
+      "desc": "磁盘空间占用",
+      "website": "https://github.com/windirstat/windirstat",
+      "pan": "https://wwanv.lanzouc.com/iulOw4a2thpi"
+    },
+    {
       "icon": "/icons/ContextMenuManager.ico",
       "name": "ContextMenuManager",
       "desc": "右键菜单管理",
@@ -530,20 +544,6 @@
       ],
       "website": "https://github.com/Raphire/Win11Debloat",
       "pan": "https://wwanv.lanzoum.com/iGjab3yfrukf"
-    },
-    {
-      "icon": "/icons/Dismpp.ico",
-      "name": "Dism++",
-      "desc": "系统优化",
-      "website": "https://www.chuyu.me/zh-Hans/",
-      "pan": "https://wwanv.lanzoum.com/iIcgD3x6rhsf"
-    },
-    {
-      "icon": "/icons/WinDirStat.ico",
-      "name": "WinDirStat",
-      "desc": "磁盘空间占用",
-      "website": "https://github.com/windirstat/windirstat",
-      "pan": "https://wwanv.lanzouc.com/iulOw4a2thpi"
     },
     {
       "icon": "/icons/SuperKillller.png",

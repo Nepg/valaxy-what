@@ -153,7 +153,7 @@ html.dark .card-title {
   /* 不再用 var(--ark-surface) 纯白色底色 */
   background-color: rgba(0,0,0,0.02);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.s ease;
   z-index: 0;
   border-radius: 4px;
 }

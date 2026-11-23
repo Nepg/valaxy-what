@@ -99,6 +99,27 @@
             "desc": "",
             "website": "https://viayoo.com/zh-cn/",
             "pan": "https://share.feijipan.com/s/lzyuDAzd"
+        },
+        {
+            "icon": "/icons/sai.png",
+            "name": "Split APKs Installer",
+            "desc": "复杂APK格式的安装器",
+            "website": "https://github.com/Aefyr/SAI",
+            "pan": "https://share.feijipan.com/s/GwfThyyE"
+        },
+        {
+            "icon": "/icons/morphe.png",
+            "name": "Morphe",
+            "desc": "Android应用管理工具",
+            "website": "https://github.com/MorpheApp/morphe-manager",
+            "pan": "https://share.feijipan.com/s/tvfTheAx"
+        },
+        {
+            "icon": "/icons/github.svg",
+            "name": "kveld-morphe-patches",
+            "desc": "Morphe 补丁",
+            "website": "https://github.com/kveld9/kveld-morphe-patches",
+            "pan": "https://share.feijipan.com/s/PffThjPr"
         }
     ]
 }
